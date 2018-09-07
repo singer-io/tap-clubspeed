@@ -1,0 +1,110 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "heatTypesId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "cannotBelow": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "cannotExceed": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "cost": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "enabled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "isEventHeatOnly": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "isPracticeHeat": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "lapsOrMinutes": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "memberOnly": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "raceBy": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "racersPerHeat": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "scheduleDuration": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "speedLevel": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "trackId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "winBy": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

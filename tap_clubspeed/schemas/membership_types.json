@@ -1,0 +1,50 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "membershipTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "enabled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "expirationType": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "expires": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "priceLevel": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "seq": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "checkDetailId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "checkId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "status": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "productId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "productName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "createdDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "qty": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "unitPrice": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "unitPrice2": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountApplied": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "taxId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "taxPercent": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "gst": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "voidNotes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "p_Points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "p_CustId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "r_Points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountUserId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountDesc": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "calculateType": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountNotes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "g_Points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "g_CustId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "m_DaysAdded": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "s_SaleBy": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "s_NoOfLapsOrSeconds": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "s_CustId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "s_Vol": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "giftCardHistoryId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "customerId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "userId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "notes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "checkId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "checkDetailId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "ipAddress": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "transactionDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

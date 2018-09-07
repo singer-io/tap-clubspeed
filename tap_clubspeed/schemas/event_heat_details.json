@@ -1,0 +1,45 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "customerId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "proskill": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "added": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "roundLoseNum": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "totalRaces": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

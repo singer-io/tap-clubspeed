@@ -1,0 +1,125 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "checkId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "customerId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "status": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "userId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "total": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "broker": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "notes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "gratuity": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "fee": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "openedDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "closedDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "isTaxExempt": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "discount": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "discountNotes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "discountUserId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "invoiceDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

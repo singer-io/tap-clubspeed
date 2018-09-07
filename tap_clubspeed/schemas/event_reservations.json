@@ -1,0 +1,124 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventReservationId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "allowOnlineReservation": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "endTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "eventTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "isEventClosure": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "mainId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "minNoOfAdultsPerBooking": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "noOfRacers": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "notes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ptsPerReservation": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "repId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "startTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "status": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "subject": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "typeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "userId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "externalSystemId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

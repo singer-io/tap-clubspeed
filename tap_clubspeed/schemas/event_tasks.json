@@ -1,0 +1,39 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventTaskId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "eventReservationId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "completedBy": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "completedAt": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "eventTaskTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventTaskTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "seq": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  }
+}

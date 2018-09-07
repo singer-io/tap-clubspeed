@@ -1,0 +1,100 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "heatId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "customerId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "autoNo": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "finishPosition": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "firstTime": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "groupFinishPosition": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "groupId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "lineUpPosition": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "pointHistoryId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "positionEditedDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "proskill": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "proskillDiff": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "scores": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "timeAdded": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "userId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

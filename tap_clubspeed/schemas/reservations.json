@@ -1,0 +1,64 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "onlineBookingReservationsId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "onlineBookingsId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "customersId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "sessionId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "quantity": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "createdAt": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "onlineBookingReservationStatusId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "checkId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

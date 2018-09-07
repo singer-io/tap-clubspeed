@@ -1,0 +1,94 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "createdHeatSpots": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "createdHeatTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "eventDesc": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "eventDuration": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "eventNotes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "eventScheduledTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "eventTheme": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "eventTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "eventTypeName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "memberOnly": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "reservationId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "totalRacers": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "trackNo": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

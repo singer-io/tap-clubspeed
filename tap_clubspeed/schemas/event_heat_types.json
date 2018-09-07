@@ -1,0 +1,56 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventHeatTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "cadetsPerHeat": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "eventTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "heatsPerRacer": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "heatTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "racersPerHeat": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "roundNumber": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

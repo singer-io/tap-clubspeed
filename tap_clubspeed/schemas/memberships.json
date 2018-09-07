@@ -1,0 +1,46 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "customerId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "membershipTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "byUserId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "changed": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "expiration": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "notes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  }
+}

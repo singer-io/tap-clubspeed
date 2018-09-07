@@ -1,0 +1,86 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "productId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "productType": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "price1": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "price2": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "taxId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "productClassId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "enabled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "p_Points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "r_Points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "g_Points": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "priceCadet": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

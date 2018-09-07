@@ -1,0 +1,125 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "heatId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "beginning": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "eventRound": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "finish": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "heatColor": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "lapsOrMinutes": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "memberOnly": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "notes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "numberOfReservation": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "pointsNeeded": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "raceBy": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "racersPerHeat": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "scheduledTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "scheduleDuration": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "speedLevel": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "status": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "track": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "winBy": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventReservationLinkId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "checkId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "reservationId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

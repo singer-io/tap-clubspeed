@@ -1,0 +1,74 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "eventTypeId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "deleted": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "displayAtRegistration": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "enabled": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "eventTypeName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "eventTypeTheme": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "memberOnly": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "onlineProductId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "ptsPerReservation": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "trackId": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}
