@@ -33,7 +33,7 @@ class Stream():
     replication_key = None
     stream = None
     key_properties = KEY_PROPERTIES
-    
+
 
     def __init__(self, client=None):
         self.client = client
@@ -126,6 +126,7 @@ class CheckDetails(Stream):
     name = "check_details"
     replication_method = "INCREMENTAL"
     replication_key = "createdDate"
+    key_properties = [ "checkDetailId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -140,6 +141,7 @@ class Checks(Stream):
     name = "checks"
     replication_method = "INCREMENTAL"
     replication_key = "openedDate"
+    key_properties = [ "checkId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -153,6 +155,7 @@ class Customers(Stream):
     name = "customers"
     replication_method = "INCREMENTAL"
     replication_key = "accountCreated"
+    key_properties = [ "customerId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -178,6 +181,7 @@ class EventHeatDetails(Stream):
     name = "event_heat_details"
     replication_method = "INCREMENTAL"
     replication_key = "added" 
+    key_properties = [ "eventId" ]
     # Key also could be "added". Docs are unclear.
 
     def sync(self, state):
@@ -214,6 +218,7 @@ class EventReservations(Stream):
     name = "event_reservations"
     replication_method = "INCREMENTAL"
     replication_key = "startTime"
+    key_properties = [ "eventReservationId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -251,6 +256,7 @@ class Events(Stream):
     name = "events"
     replication_method = "INCREMENTAL"
     replication_key = "createdHeatTime"
+    key_properties = [ "eventId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -275,6 +281,7 @@ class EventTasks(Stream):
     name = "event_tasks"
     replication_method = "INCREMENTAL"
     replication_key = "completedAt"
+    key_properties = [ "eventTaskId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -287,7 +294,7 @@ class EventTasks(Stream):
 class EventTaskTypes(Stream):
     name = "event_task_types"
     replication_method = "FULL_TABLE"
-    key_properties = ["eventTaskTypeId"]
+    key_properties = [ "eventTaskTypeId" ]
 
     def sync(self, state):
         event_task_types = self.client.event_task_types()
@@ -298,7 +305,7 @@ class EventTaskTypes(Stream):
 class EventTypes(Stream):
     name = "event_types"
     replication_method = "FULL_TABLE"
-    key_properties = ["eventTypeId"]
+    key_properties = [ "eventTypeId" ]
 
     def sync(self, state):
         event_types = self.client.event_types()
@@ -310,6 +317,7 @@ class GiftCardHistory(Stream):
     name = "gift_card_history"
     replication_method = "INCREMENTAL"
     replication_key = "transactionDate"
+    key_properties = [ "giftCardHistoryId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -323,6 +331,7 @@ class HeatDetails(Stream):
     name = "heat_details"
     replication_method = "INCREMENTAL"
     replication_key = "timeAdded"
+    key_properties = [ "heatId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -336,6 +345,7 @@ class HeatMain(Stream):
     name = "heat_main"
     replication_method = "INCREMENTAL"
     replication_key = "heatId"
+    key_properties = [ "heatId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -361,6 +371,7 @@ class Memberships(Stream):
     name = "memberships"
     replication_method = "INCREMENTAL"
     replication_key = "membershipTypeId"
+    key_properties = [ "membershipTypeId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -384,7 +395,9 @@ class MembershipTypes(Stream):
 class Payments(Stream):
     name = "payments"
     replication_method = "INCREMENTAL"
-    replication_key = "paymentId"
+    replication_key = "payDate"
+    key_properties = [ "paymentId" ]
+
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
@@ -423,6 +436,7 @@ class Reservations(Stream):
     name = "reservations"
     replication_method = "INCREMENTAL"
     replication_key = "createdAt"
+    key_properties = [ "onlineBookingReservationsId" ]
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
