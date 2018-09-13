@@ -19,6 +19,7 @@ class Clubspeed(object):
         self._limit = 500
 
 
+
     def _get(self, url, **kwargs):
         response = requests.get(url)
         response.raise_for_status()
@@ -50,8 +51,11 @@ class Clubspeed(object):
         return endpoint
 
 
-    def _add_filter(self, endpoint, column_name, bookmark):
-        endpoint += '&where={{"{column_name}":{{"$gt":"{bookmark}"}}}}'.format(column_name=column_name, bookmark=bookmark)
+    def _add_filter(self, endpoint, api_version, column_name, bookmark):
+        if api_version == 'V2':
+            endpoint += '&where={{"{column_name}":{{"$gt":"{bookmark}"}}}}'.format(column_name=column_name, bookmark=bookmark)
+        else:
+            endpoint += '&filter={column_name}>{bookmark}'.format(column_name=column_name, bookmark=bookmark)
         return endpoint
 
 
@@ -77,7 +81,7 @@ class Clubspeed(object):
         check_details = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -93,7 +97,7 @@ class Clubspeed(object):
         checks = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -114,7 +118,7 @@ class Clubspeed(object):
         customers = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -138,7 +142,7 @@ class Clubspeed(object):
         heat_details = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -164,7 +168,7 @@ class Clubspeed(object):
         reservations = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -191,7 +195,7 @@ class Clubspeed(object):
         events = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -212,7 +216,7 @@ class Clubspeed(object):
         tasks = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -238,7 +242,7 @@ class Clubspeed(object):
         histories = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -254,7 +258,7 @@ class Clubspeed(object):
         heat_details = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -270,7 +274,7 @@ class Clubspeed(object):
         mains = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -292,7 +296,7 @@ class Clubspeed(object):
         memberships = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -314,7 +318,7 @@ class Clubspeed(object):
         payments = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
@@ -346,7 +350,7 @@ class Clubspeed(object):
         reservations = []
 
         if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, column_name, bookmark)
+            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         while True:
             endpoint = self._add_pagination(endpoint)
