@@ -130,7 +130,7 @@ class CheckDetails(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        check_details = self.client.check_details()
+        check_details = self.client.check_details(self.replication_key, bookmark)
         for check_detail in check_details:
             if self.is_bookmark_old(state, check_detail[self.replication_key]):
                 yield (self.stream, check_detail)
@@ -145,7 +145,7 @@ class Checks(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        checks = self.client.checks()
+        checks = self.client.checks(self.replication_key, bookmark)
         for check in checks:
             if self.is_bookmark_old(state, check[self.replication_key]):
                 yield (self.stream, check)
@@ -159,7 +159,7 @@ class Customers(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        customers = self.client.customers()
+        customers = self.client.customers(self.replication_key, bookmark)
         for customer in customers:
             if self.is_bookmark_old(state, customer[self.replication_key]):
                 yield (self.stream, customer)
@@ -186,7 +186,7 @@ class EventHeatDetails(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        event_heat_details = self.client.event_heat_details()
+        event_heat_details = self.client.event_heat_details(self.replication_key, bookmark)
         for event_heat_detail in event_heat_details:
             if self.is_bookmark_old(state, event_heat_detail[self.replication_key]):
                 yield (self.stream, event_heat_detail)
@@ -222,7 +222,7 @@ class EventReservations(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        event_reservations = self.client.event_reservations()
+        event_reservations = self.client.event_reservations(self.replication_key, bookmark)
         for event_reservation in event_reservations:
             if self.is_bookmark_old(state, event_reservation[self.replication_key]):
                 yield (self.stream, event_reservation)
@@ -235,7 +235,7 @@ class EventReservationTypes(Stream):
     key_properties = ["eventReservationTypeId"]
 
     def sync(self, state):
-        event_reservation_types = self.client.event_reservation_types()
+        event_reservation_types = self.client.event_reservation_types(self.replication_key, bookmark)
         for event_reservation_type in event_reservation_types:
             yield (self.stream, event_reservation_type)
 
@@ -260,7 +260,7 @@ class Events(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        events = self.client.events()
+        events = self.client.events(self.replication_key, bookmark)
         for event in events:
             if self.is_bookmark_old(state, event[self.replication_key]):
                 yield (self.stream, event)
@@ -285,7 +285,7 @@ class EventTasks(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        event_tasks = self.client.event_tasks()
+        event_tasks = self.client.event_tasks(self.replication_key, bookmark)
         for event_task in event_tasks:
             if self.is_bookmark_old(state, event_task[self.replication_key]):
                 yield (self.stream, event_task)
@@ -321,7 +321,7 @@ class GiftCardHistory(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        histories = self.client.gift_card_history()
+        histories = self.client.gift_card_history(self.replication_key, bookmark)
         for history in histories:
             if self.is_bookmark_old(state, history[self.replication_key]):
                 yield (self.stream, history)
@@ -335,7 +335,7 @@ class HeatDetails(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        heat_details = self.client.heat_details()
+        heat_details = self.client.heat_details(self.replication_key, bookmark)
         for heat_detail in heat_details:
             if self.is_bookmark_old(state, heat_detail[self.replication_key]):
                 yield (self.stream, heat_detail)
@@ -349,7 +349,7 @@ class HeatMain(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        heat_main = self.client.heat_main()
+        heat_main = self.client.heat_main(self.replication_key, bookmark)
         for item in heat_main:
             if self.is_bookmark_old(state, item[self.replication_key]):
                 yield (self.stream, item)
@@ -375,7 +375,7 @@ class Memberships(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        memberships = self.client.memberships()
+        memberships = self.client.memberships(self.replication_key, bookmark)
         for item in memberships:
             if self.is_bookmark_old(state, item[self.replication_key]):
                 yield (self.stream, item)
@@ -398,10 +398,9 @@ class Payments(Stream):
     replication_key = "payDate"
     key_properties = [ "paymentId" ]
 
-
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        payments = self.client.payments()
+        payments = self.client.payments(self.replication_key, bookmark)
         for item in payments:
             if self.is_bookmark_old(state, item[self.replication_key]):
                 yield (self.stream, item)
@@ -440,7 +439,7 @@ class Reservations(Stream):
 
     def sync(self, state):
         bookmark = self.get_bookmark(state)
-        reservations = self.client.reservations()
+        reservations = self.client.reservations(self.replication_key, bookmark)
         for item in reservations:
             if self.is_bookmark_old(state, item[self.replication_key]):
                 yield (self.stream, item)

@@ -110,4 +110,4 @@ venv.bak/
 catalog.json
 config.json
 generate-schema.js
-
+config*.json

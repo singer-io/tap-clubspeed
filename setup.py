@@ -8,7 +8,7 @@ setup(name='tap-clubspeed',
       author='@lambtron',
       url='https://andyjiang.com',
       classifiers=['Programming Language :: Python :: 3 :: Only'],
-      py_modules=['tap_toast'],
+      py_modules=['tap_clubspeed'],
       install_requires=[
           'singer-python==5.1.5',
           'requests==2.19.1'
