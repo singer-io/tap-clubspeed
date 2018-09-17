@@ -157,6 +157,8 @@ class Customers(Stream):
     replication_key = "accountCreated"
     key_properties = [ "customerId" ]
 
+    # https://rpmstamford.clubspeedtiming.com/api/index.php/customers.json?key=Pc8BULWF4Mp8MSZv&page=1051&limit=100
+
     def sync(self, state):
         bookmark = self.get_bookmark(state)
         customers = self.client.customers(self.replication_key, bookmark)
@@ -235,7 +237,7 @@ class EventReservationTypes(Stream):
     key_properties = ["eventReservationTypeId"]
 
     def sync(self, state):
-        event_reservation_types = self.client.event_reservation_types(self.replication_key, bookmark)
+        event_reservation_types = self.client.event_reservation_types()
         for event_reservation_type in event_reservation_types:
             yield (self.stream, event_reservation_type)
 

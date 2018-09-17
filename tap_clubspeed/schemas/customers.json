@@ -94,7 +94,7 @@
     "Custom4": {
       "type": [
         "null",
-        "number"
+        "string"
       ]
     },
     "deleted": {
@@ -311,7 +311,7 @@
     "Zip": {
       "type": [
         "null",
-        "number"
+        "string"
       ]
     }
   }

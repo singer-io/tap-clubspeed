@@ -2,7 +2,7 @@
 import requests
 import logging
 
-log = logging.getLogger()
+logger = logging.getLogger()
 
 
 class Clubspeed(object):
@@ -16,12 +16,16 @@ class Clubspeed(object):
         self.api_prefix = 'api/index.php/'
         self.private_key = private_key
         self._url_template = "{protocol}://{subdomain}.{domain}/{api_prefix}{path}.json?key={private_key}"
-        self._limit = 500
+        self._limit = 100
 
 
 
     def _get(self, url, **kwargs):
+        logger.info("Hitting endpoint {url}".format(url=url))
         response = requests.get(url)
+        logger.info("  Response is {status}".format(status=response.status_code))
+        if response.status_code == 500:
+            return None
         response.raise_for_status()
         return response.json()
 
@@ -120,14 +124,15 @@ class Clubspeed(object):
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
+        # endpoint = 'https://rpmstamford.clubspeedtiming.com/api/index.php/customers.json?key=Pc8BULWF4Mp8MSZv&page=1050&limit=100'
+
         while True:
             endpoint = self._add_pagination(endpoint)
-            print(endpoint)
             res = self._get(endpoint)
-            print(len(res))
-            customers.extend(res)
-            if len(res) < self._limit:
-                break
+            if res is not None:
+                customers.extend(res)
+                if len(res) < self._limit:
+                    break
         return customers
 
 
@@ -136,7 +141,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def event_heat_details(self):
+    def event_heat_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventHeatDetails')
 
         heat_details = []
@@ -163,7 +168,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def event_reservations(self):
+    def event_reservations(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventReservations')
         reservations = []
 
@@ -189,7 +194,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def events(self):
+    def events(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('events')
 
         events = []
@@ -211,7 +216,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def event_tasks(self):
+    def event_tasks(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventTasks')
         tasks = []
 
@@ -237,7 +242,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def gift_card_history(self):
+    def gift_card_history(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('giftCardHistory')
         histories = []
 
@@ -269,7 +274,7 @@ class Clubspeed(object):
         return heat_details
 
 
-    def heat_main(self):
+    def heat_main(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('heatMain')
         mains = []
 
@@ -283,7 +288,6 @@ class Clubspeed(object):
             if len(res) < self._limit:
                 break
         return mains
-        return self._get(endpoint)
 
 
     def heat_types(self):
@@ -291,7 +295,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def memberships(self):
+    def memberships(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('memberships')
         memberships = []
 
@@ -345,7 +349,7 @@ class Clubspeed(object):
         return self._get(endpoint)
 
 
-    def reservations(self):
+    def reservations(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('reservations')
         reservations = []
 
