@@ -82,34 +82,32 @@ class Clubspeed(object):
 
     def check_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checkDetails')
-        check_details = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            check_details.extend(res['checkDetails'])
-            if len(res) < self._limit:
-                break
-        return check_details
+            length = len(res['checkDetails'])
+            for check_detail in res['checkDetails']:
+                yield check_detail
 
 
     def checks(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checks')
-        checks = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            checks.extend(res['checks'])
-            if len(res) < self._limit:
-                break
-        return checks
+            length = len(res['checks'])
+            for check in res['checks']:
+                yield check
 
 
     def check_totals(self):
@@ -119,21 +117,20 @@ class Clubspeed(object):
 
     def customers(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('customers')
-        customers = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
         # endpoint = 'https://rpmstamford.clubspeedtiming.com/api/index.php/customers.json?key=Pc8BULWF4Mp8MSZv&page=1050&limit=100'
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             if res is not None:
-                customers.extend(res)
-                if len(res) < self._limit:
-                    break
-        return customers
+                for customer in res:
+                    yield customer
 
 
     def discount_types(self):
@@ -144,18 +141,16 @@ class Clubspeed(object):
     def event_heat_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventHeatDetails')
 
-        heat_details = []
-
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            heat_details.extend(res)
-            if len(res) < self._limit:
-                break
-        return heat_details
+            length = len(res)
+            for item in res:
+                yield item
 
 
     def event_heat_types(self):
@@ -170,18 +165,16 @@ class Clubspeed(object):
 
     def event_reservations(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventReservations')
-        reservations = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            reservations.extend(res)
-            if len(res) < self._limit:
-                break
-        return reservations
+            for item in res:
+                yield item
 
 
     def event_reservation_types(self):
@@ -197,18 +190,15 @@ class Clubspeed(object):
     def events(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('events')
 
-        events = []
-
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            events.extend(res)
-            if len(res) < self._limit:
-                break
-        return events
+            for item in res:
+                yield item
 
 
     def event_statuses(self):
@@ -218,18 +208,16 @@ class Clubspeed(object):
 
     def event_tasks(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventTasks')
-        tasks = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            tasks.extend(res)
-            if len(res) < self._limit:
-                break
-        return tasks
+            for item in res:
+                yield item
 
 
     def event_task_types(self):
@@ -244,50 +232,44 @@ class Clubspeed(object):
 
     def gift_card_history(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('giftCardHistory')
-        histories = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            histories.extend(res)
-            if len(res) < self._limit:
-                break
-        return histories
+            for item in res:
+                yield item
 
 
     def heat_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('heatDetails')
-        heat_details = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            heat_details.extend(res)
-            if len(res) < self._limit:
-                break
-        return heat_details
+            for item in res:
+                yield item
 
 
     def heat_main(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('heatMain')
-        mains = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            mains.extend(res)
-            if len(res) < self._limit:
-                break
-        return mains
+            for item in res:
+                yield item
 
 
     def heat_types(self):
@@ -297,18 +279,16 @@ class Clubspeed(object):
 
     def memberships(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('memberships')
-        memberships = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            memberships.extend(res)
-            if len(res) < self._limit:
-                break
-        return memberships
+            for item in res:
+                yield item
 
 
     def membership_types(self):
@@ -319,18 +299,16 @@ class Clubspeed(object):
 
     def payments(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('payments')
-        payments = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            payments.extend(res)
-            if len(res) < self._limit:
-                break
-        return payments
+            for item in res:
+                yield item
 
 
     def product_classes(self):
@@ -351,18 +329,16 @@ class Clubspeed(object):
 
     def reservations(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('reservations')
-        reservations = []
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        while True:
+        length = 1
+        while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            reservations.extend(res['reservations'])
-            if len(res) < self._limit:
-                break
-        return reservations
+            for item in res['reservations']:
+                yield item
 
 
     def sources(self):

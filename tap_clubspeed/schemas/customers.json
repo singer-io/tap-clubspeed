@@ -27,8 +27,7 @@
       "type": [
         "null",
         "string"
-      ],
-      "format": "date-time"
+      ]
     },
     "birthdate": {
       "type": [
