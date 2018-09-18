@@ -132,8 +132,6 @@ class CheckDetails(Stream):
         bookmark = self.get_bookmark(state)
         check_details = self.client.check_details(self.replication_key, bookmark)
         for check_detail in check_details:
-            # logger.info(check_detail)
-            # logger.info(self.replication_key)
             if self.is_bookmark_old(state, check_detail[self.replication_key]):
                 yield (self.stream, check_detail)
 

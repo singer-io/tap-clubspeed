@@ -111,3 +111,6 @@ catalog.json
 config.json
 generate-schema.js
 config*.json
+
+# ds store.
+.DS_Store
