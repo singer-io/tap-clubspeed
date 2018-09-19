@@ -101,8 +101,6 @@ class Clubspeed(object):
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
 
-        # endpoint = 'https://rpmrochester.clubspeedtiming.com/api/index.php/checks.json?key=SVBmLRxafwpa2DYG&page=847&limit=100'
-
         length = 1
         while length > 0:
             endpoint = self._add_pagination(endpoint)
@@ -122,9 +120,6 @@ class Clubspeed(object):
 
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        # endpoint = 'https://rpmbuffalo.clubspeedtiming.com/api/index.php/customers.json?key=24VD5KUwr33kh3NY&page=4425&limit=100'
-        endpoint = 'https://rpmlongisland.clubspeedtiming.com/api/index.php/customers.json?key=zXfd4fBRNDLMK3vx&page=1051&limit=100'
 
         length = 1
         while length > 0:

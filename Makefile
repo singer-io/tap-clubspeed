@@ -18,6 +18,10 @@ build:
 dev:
 	@python3 setup.py develop
 
+# Deploy.
+release:
+	@python3 setup.py sdist upload
+
 #
 # Phonies.
 #
