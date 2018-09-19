@@ -101,6 +101,8 @@ class Clubspeed(object):
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
 
+        # endpoint = 'https://rpmrochester.clubspeedtiming.com/api/index.php/checks.json?key=SVBmLRxafwpa2DYG&page=847&limit=100'
+
         length = 1
         while length > 0:
             endpoint = self._add_pagination(endpoint)
@@ -121,7 +123,8 @@ class Clubspeed(object):
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
-        # endpoint = 'https://rpmstamford.clubspeedtiming.com/api/index.php/customers.json?key=Pc8BULWF4Mp8MSZv&page=1050&limit=100'
+        # endpoint = 'https://rpmbuffalo.clubspeedtiming.com/api/index.php/customers.json?key=24VD5KUwr33kh3NY&page=4425&limit=100'
+        endpoint = 'https://rpmlongisland.clubspeedtiming.com/api/index.php/customers.json?key=zXfd4fBRNDLMK3vx&page=1051&limit=100'
 
         length = 1
         while length > 0:
@@ -173,6 +176,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -197,6 +201,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -216,6 +221,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -240,6 +246,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -254,6 +261,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -268,6 +276,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -287,6 +296,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -303,10 +313,13 @@ class Clubspeed(object):
         if bookmark is not None and column_name is not None:
             endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
 
+        # endpoint = 'https://rpmrochester.clubspeedtiming.com/api/index.php/payments.json?key=SVBmLRxafwpa2DYG&page=789&limit=100'
+
         length = 1
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res)
             for item in res:
                 yield item
 
@@ -337,6 +350,7 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
+            length = len(res['reservations'])
             for item in res['reservations']:
                 yield item
 
