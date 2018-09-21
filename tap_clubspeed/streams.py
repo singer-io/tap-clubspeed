@@ -122,15 +122,13 @@ class Stream():
 
 class Booking(Stream):
     name = "booking"
-    replication_method = "INCREMENTAL"
-    replication_key = "onlineBookingsId"
-    key_properties = ["onlineBookingsId"]
+    replication_method = "FULL_TABLE"
+    key_properties = [ "onlineBookingsId" ]
 
 
 class BookingAvailability(Stream):
     name = "booking_availability"
-    replication_method = "INCREMENTAL"
-    replication_key = "heatId"
+    replication_method = "FULL_TABLE"
     key_properties = ["heatId"]
 
 
@@ -157,9 +155,8 @@ class Customers(Stream):
 
 class DiscountTypes(Stream):
     name = "discount_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["discountId"]
-    replication_key = key_properties[0]
 
 
 class EventHeatDetails(Stream):
@@ -171,16 +168,14 @@ class EventHeatDetails(Stream):
 
 class EventHeatTypes(Stream):
     name = "event_heat_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["eventHeatTypeId"]
-    replication_key = key_properties[0]
 
 
 class EventReservationLinks(Stream): 
     name = "event_reservation_links"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["eventReservationLinkId"]
-    replication_key = key_properties[0]
 
 
 class EventReservations(Stream):
@@ -192,16 +187,14 @@ class EventReservations(Stream):
 
 class EventReservationTypes(Stream):
     name = "event_reservation_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["eventReservationTypeId"]
-    replication_key = key_properties[0]
 
 
 class EventRounds(Stream):
     name = "event_rounds"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["eventRoundId"]
-    replication_key = key_properties[0]
 
 
 class Events(Stream):
@@ -213,9 +206,8 @@ class Events(Stream):
 
 class EventStatuses(Stream):
     name = "event_statuses"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["eventStatusId"]
-    replication_key = key_properties[0]
 
 
 class EventTasks(Stream):
@@ -227,16 +219,14 @@ class EventTasks(Stream):
 
 class EventTaskTypes(Stream):
     name = "event_task_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = [ "eventTaskId" ]
-    replication_key = key_properties[0]
 
 
 class EventTypes(Stream):
     name = "event_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = [ "eventTypeId" ]
-    replication_key = key_properties[0]
 
 
 class GiftCardHistory(Stream):
@@ -255,31 +245,27 @@ class HeatDetails(Stream):
 
 class HeatMain(Stream):
     name = "heat_main"
-    replication_method = "INCREMENTAL"
-    replication_key = "heatId"
+    replication_method = "FULL_TABLE"
     key_properties = [ "heatId" ]
 
 
 class HeatTypes(Stream):
     name = "heat_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["heatTypesId"]
-    replication_key = key_properties[0]
 
 
 
 class Memberships(Stream):
     name = "memberships"
-    replication_method = "INCREMENTAL"
-    replication_key = "membershipTypeId"
+    replication_method = "FULL_TABLE"
     key_properties = [ "membershipTypeId" ]
 
 
 class MembershipTypes(Stream):
     name = "membership_types"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["membershipTypeId"]
-    replication_key = key_properties[0]
 
 
 class Payments(Stream):
@@ -291,16 +277,14 @@ class Payments(Stream):
 
 class ProductClasses(Stream):
     name = "product_classes"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["productClassId"]
-    replication_key = key_properties[0]
 
 
 class Products(Stream):
     name = "products"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["productId"]
-    replication_key = key_properties[0]
 
 
 class Reservations(Stream):
@@ -312,23 +296,20 @@ class Reservations(Stream):
 
 class Sources(Stream):
     name = "sources"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["sourceId"]
-    replication_key = key_properties[0]
 
 
 class Taxes(Stream):
     name = "taxes"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["taxId"]
-    replication_key = key_properties[0]
 
 
 class Users(Stream):
     name = "users"
-    replication_method = "INCREMENTAL"
+    replication_method = "FULL_TABLE"
     key_properties = ["userId"]
-    replication_key = key_properties[0]
 
 
 
