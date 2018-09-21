@@ -9,7 +9,6 @@ default: build
 # Tasks.
 #
 
-
 # Build.
 build: 
 	@pip3 install .
@@ -22,7 +21,8 @@ dev:
 release:
 	@python3 setup.py sdist upload
 
-catalog:
+# Generate schema.
+schema:
 	@node generate-schema.js
 
 #
@@ -32,4 +32,5 @@ catalog:
 .PHONY: test
 .PHONY: build
 .PHONY: dev
+.PHONY: schema
 
