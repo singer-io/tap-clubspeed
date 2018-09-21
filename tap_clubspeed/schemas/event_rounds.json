@@ -7,19 +7,19 @@
     "eventRoundId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "cadetsPerHeat": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "eventId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "heatDescription": {
@@ -31,25 +31,25 @@
     "heatsPerRacer": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "heatTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "racersPerHeat": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "roundNumber": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

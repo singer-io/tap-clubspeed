@@ -7,7 +7,7 @@
     "membershipTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "description": {
@@ -19,13 +19,13 @@
     "enabled": {
       "type": [
         "null",
-        "boolean"
+        "integer"
       ]
     },
     "expirationType": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "expires": {
@@ -37,13 +37,13 @@
     "priceLevel": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "seq": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

@@ -7,19 +7,19 @@
     "eventReservationLinkId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "checkId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "reservationId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

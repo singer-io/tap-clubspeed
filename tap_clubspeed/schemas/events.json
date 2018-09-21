@@ -7,13 +7,13 @@
     "eventId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "createdHeatSpots": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "createdHeatTime": {
@@ -32,7 +32,7 @@
     "eventDuration": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "eventNotes": {
@@ -51,13 +51,13 @@
     "eventTheme": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "eventTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "eventTypeName": {
@@ -75,19 +75,19 @@
     "reservationId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "totalRacers": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "trackNo": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

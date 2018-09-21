@@ -7,7 +7,7 @@
     "userId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "firstname": {
@@ -31,7 +31,7 @@
     "cardId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "enabled": {

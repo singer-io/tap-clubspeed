@@ -7,19 +7,19 @@
     "giftCardHistoryId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "customerId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "userId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "points": {
@@ -31,7 +31,7 @@
     "type": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "notes": {
@@ -43,13 +43,13 @@
     "checkId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "checkDetailId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "ipAddress": {

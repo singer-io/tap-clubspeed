@@ -7,19 +7,19 @@
     "onlineBookingReservationsId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "onlineBookingsId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "customersId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "sessionId": {
@@ -31,7 +31,7 @@
     "quantity": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "createdAt": {
@@ -51,13 +51,13 @@
     "onlineBookingReservationStatusId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "checkId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

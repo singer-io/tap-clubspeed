@@ -7,7 +7,7 @@
     "eventTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "deleted": {
@@ -43,7 +43,7 @@
     "eventTypeTheme": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "memberOnly": {
@@ -55,19 +55,19 @@
     "onlineProductId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "ptsPerReservation": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "trackId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

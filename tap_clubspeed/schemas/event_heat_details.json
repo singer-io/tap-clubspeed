@@ -7,19 +7,19 @@
     "eventId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "customerId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "proskill": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "added": {
@@ -32,13 +32,13 @@
     "roundLoseNum": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "totalRaces": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

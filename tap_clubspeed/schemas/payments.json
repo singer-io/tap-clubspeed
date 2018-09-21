@@ -7,7 +7,7 @@
     "paymentId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "cardType": {
@@ -19,13 +19,13 @@
     "checkId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "customerId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "extCardType": {
@@ -50,7 +50,7 @@
     "payStatus": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "payTax": {
@@ -68,7 +68,7 @@
     "payType": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "transaction": {
@@ -80,7 +80,7 @@
     "userId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "voidDate": {
@@ -105,7 +105,7 @@
     "voidUser": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

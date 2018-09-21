@@ -7,25 +7,25 @@
     "heatTypesId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "cannotBelow": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "cannotExceed": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "cost": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "deleted": {
@@ -55,7 +55,7 @@
     "lapsOrMinutes": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "memberOnly": {
@@ -73,37 +73,37 @@
     "raceBy": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "racersPerHeat": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "scheduleDuration": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "speedLevel": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "trackId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "winBy": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

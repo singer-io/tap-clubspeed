@@ -7,7 +7,7 @@
     "eventReservationTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "description": {

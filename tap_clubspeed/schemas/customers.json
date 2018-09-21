@@ -7,7 +7,7 @@
     "customerId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "accountCreated": {
@@ -39,7 +39,7 @@
     "cardId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "City": {
@@ -129,7 +129,7 @@
     "gender": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "generalNotes": {
@@ -141,7 +141,7 @@
     "howdidyouhearaboutus": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "ignoreDOB": {
@@ -184,7 +184,7 @@
     "membershipStatus": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "membershipText": {
@@ -208,7 +208,7 @@
     "originalId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "phoneNumber": {
@@ -226,7 +226,7 @@
     "priceLevel": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "privacy1": {
@@ -238,7 +238,7 @@
     "proskill": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "racername": {
@@ -256,49 +256,49 @@
     "status1": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "status2": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "status3": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "status4": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "totalRaces": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "totalVisits": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "waiver": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "waiver2": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "webUserName": {
@@ -310,7 +310,7 @@
     "Zip": {
       "type": [
         "null",
-        "string"
+        "number"
       ]
     }
   }

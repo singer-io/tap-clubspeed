@@ -7,7 +7,7 @@
     "taxId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "description": {

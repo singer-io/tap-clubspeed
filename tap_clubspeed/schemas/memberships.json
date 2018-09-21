@@ -7,19 +7,19 @@
     "customerId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "membershipTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "byUserId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "changed": {

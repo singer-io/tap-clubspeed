@@ -7,25 +7,25 @@
     "heatId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "customerId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "autoNo": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "finishPosition": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "firstTime": {
@@ -37,25 +37,25 @@
     "groupFinishPosition": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "groupId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "lineUpPosition": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "pointHistoryId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "positionEditedDate": {
@@ -68,13 +68,13 @@
     "proskill": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "proskillDiff": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "scores": {
@@ -93,7 +93,7 @@
     "userId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

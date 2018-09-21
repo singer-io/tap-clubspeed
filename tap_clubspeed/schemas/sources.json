@@ -7,7 +7,7 @@
     "sourceId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "deleted": {
@@ -25,7 +25,7 @@
     "locationId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "name": {
@@ -37,7 +37,7 @@
     "seq": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

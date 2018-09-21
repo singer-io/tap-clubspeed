@@ -7,7 +7,7 @@
     "heatId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "beginning": {
@@ -20,7 +20,7 @@
     "eventRound": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "finish": {
@@ -33,13 +33,13 @@
     "heatColor": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "lapsOrMinutes": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "memberOnly": {
@@ -57,25 +57,25 @@
     "numberOfReservation": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "pointsNeeded": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "raceBy": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "racersPerHeat": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "scheduledTime": {
@@ -88,37 +88,37 @@
     "scheduleDuration": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "speedLevel": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "status": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "track": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "type": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "winBy": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

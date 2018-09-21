@@ -7,13 +7,13 @@
     "productId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "productType": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "description": {
@@ -37,13 +37,13 @@
     "taxId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "productClassId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "enabled": {

@@ -7,7 +7,7 @@
     "discountId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "description": {
@@ -19,7 +19,7 @@
     "calculateType": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "amount": {
@@ -43,7 +43,7 @@
     "productClassId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "deleted": {

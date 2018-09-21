@@ -7,19 +7,19 @@
     "eventTaskId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "eventReservationId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "completedBy": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "completedAt": {
@@ -32,7 +32,7 @@
     "eventTaskTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

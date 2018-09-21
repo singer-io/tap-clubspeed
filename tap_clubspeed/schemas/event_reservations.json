@@ -7,7 +7,7 @@
     "eventReservationId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "allowOnlineReservation": {
@@ -38,7 +38,7 @@
     "eventTypeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "isEventClosure": {
@@ -50,19 +50,19 @@
     "mainId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "minNoOfAdultsPerBooking": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "noOfRacers": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "notes": {
@@ -74,13 +74,13 @@
     "ptsPerReservation": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "repId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "startTime": {
@@ -93,7 +93,7 @@
     "status": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "subject": {
@@ -105,19 +105,19 @@
     "typeId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "userId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "externalSystemId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }

@@ -7,7 +7,7 @@
     "productClassId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "description": {

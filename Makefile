@@ -22,6 +22,9 @@ dev:
 release:
 	@python3 setup.py sdist upload
 
+catalog:
+	@node generate-schema.js
+
 #
 # Phonies.
 #

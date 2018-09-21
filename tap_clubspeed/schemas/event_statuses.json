@@ -7,19 +7,19 @@
     "eventStatusId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "colorId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "seq": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "status": {

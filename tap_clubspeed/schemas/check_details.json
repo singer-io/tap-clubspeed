@@ -7,31 +7,31 @@
     "checkDetailId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "checkId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "status": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "type": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "productId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "productName": {
@@ -50,7 +50,7 @@
     "qty": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "unitPrice": {
@@ -74,7 +74,7 @@
     "taxId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "taxPercent": {
@@ -98,25 +98,25 @@
     "p_Points": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "p_CustId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "r_Points": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "discountUserId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "discountDesc": {
@@ -128,13 +128,13 @@
     "calculateType": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "discountId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "discountNotes": {
@@ -152,37 +152,37 @@
     "g_CustId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "m_DaysAdded": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "s_SaleBy": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "s_NoOfLapsOrSeconds": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "s_CustId": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     },
     "s_Vol": {
       "type": [
         "null",
-        "number"
+        "integer"
       ]
     }
   }
