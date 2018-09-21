@@ -56,6 +56,8 @@ class Clubspeed(object):
 
 
     def _add_filter(self, endpoint, api_version, column_name, bookmark):
+        if bookmark is None or column_name is None:
+            return endpoint
         if api_version == 'V2':
             endpoint += '&where={{"{column_name}":{{"$gt":"{bookmark}"}}}}'.format(column_name=column_name, bookmark=bookmark)
         else:
@@ -63,307 +65,207 @@ class Clubspeed(object):
         return endpoint
 
 
+    def _get_response(self, endpoint, key=None):
+        length = 1
+        while length > 0:
+            endpoint = self._add_pagination(endpoint)
+            res = self._get(endpoint)
+            if key is not None:
+                res = res[key]
+            length = len(res)
+            for item in res:
+                yield item
+
+
     def is_authorized(self):
         endpoint = self._construct_endpoint('payments')
         return self._get(endpoint)
 
 
-    def booking(self):
+    def booking(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('booking')
-        json = self._get(endpoint)
-        return json['bookings']
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint, 'bookings')
 
 
-    def booking_availability(self):
+    def booking_availability(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('bookingAvailability')
-        json = self._get(endpoint)
-        return json['bookings']
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint, 'bookings')
 
 
     def check_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checkDetails')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res['checkDetails'])
-            for check_detail in res['checkDetails']:
-                yield check_detail
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint, 'checkDetails')
 
 
     def checks(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checks')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res['checks'])
-            for check in res['checks']:
-                yield check
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint, 'checks')
 
 
-    def check_totals(self):
+    def check_totals(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checkTotals')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def customers(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('customers')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            if res is not None:
-                for customer in res:
-                    yield customer
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def discount_types(self):
+    def discount_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('discountType')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def event_heat_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventHeatDetails')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_heat_types(self):
+    def event_heat_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventHeatTypes')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_reservation_links(self):
+    def event_reservation_links(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventReservationLinks')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def event_reservations(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventReservations')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_reservation_types(self):
+    def event_reservation_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventReservationTypes')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_rounds(self):
+    def event_rounds(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventRounds')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def events(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('events')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_statuses(self):
+    def event_statuses(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventStatuses')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def event_tasks(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventTasks')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_task_types(self):
+    def event_task_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventTaskTypes')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def event_types(self):
+    def event_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('eventTypes')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def gift_card_history(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('giftCardHistory')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def heat_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('heatDetails')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def heat_main(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('heatMain')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def heat_types(self):
+    def heat_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('heatTypes')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def memberships(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('memberships')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def membership_types(self):
+    def membership_types(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('membershipTypes')
-        return self._get(endpoint)
-
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
     def payments(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('payments')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        # endpoint = 'https://rpmrochester.clubspeedtiming.com/api/index.php/payments.json?key=SVBmLRxafwpa2DYG&page=789&limit=100'
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res)
-            for item in res:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def product_classes(self):
+    def product_classes(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('productClasses')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def products(self):
+    def products(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('products')
-        json = self._get(endpoint)
-        return json["products"]
-
-
-    def racers(self):
-        endpoint = self._construct_endpoint('racers')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint, 'products')
 
 
     def reservations(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('reservations')
-
-        if bookmark is not None and column_name is not None:
-            endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-
-        length = 1
-        while length > 0:
-            endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            length = len(res['reservations'])
-            for item in res['reservations']:
-                yield item
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint, 'reservations')
 
 
-    def sources(self):
+    def sources(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('sources')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
-    def taxes(self):
+    def taxes(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('taxes')
-        json = self._get(endpoint)
-        return json["taxes"]
+        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        return self._get_response(endpoint, 'taxes')
 
 
-    def users(self):
+    def users(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('users')
-        return self._get(endpoint)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
 
 
 

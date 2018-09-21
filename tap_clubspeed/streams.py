@@ -96,6 +96,7 @@ class Stream():
 
         return metadata.to_list(mdata)
 
+
     def is_selected(self):
         return self.stream is not None
 
@@ -226,7 +227,7 @@ class EventTasks(Stream):
 class EventTaskTypes(Stream):
     name = "event_task_types"
     replication_method = "INCREMENTAL"
-    key_properties = [ "eventTaskTypeId" ]
+    key_properties = [ "eventTaskId" ]
     replication_key = key_properties[0]
 
 
@@ -299,9 +300,6 @@ class Products(Stream):
     replication_method = "INCREMENTAL"
     key_properties = ["productId"]
     replication_key = key_properties[0]
-
-
-# class Racers(Stream):
 
 
 class Reservations(Stream):

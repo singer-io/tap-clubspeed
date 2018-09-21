@@ -11,13 +11,6 @@ LOGGER = singer.get_logger()
 def sync_stream(state, instance):
     stream = instance.stream
 
-    # If we have a bookmark, use it; otherwise use start_date
-    # if (instance.replication_method == 'INCREMENTAL' and
-    #         not state.get('bookmarks', {}).get(stream.tap_stream_id, {}).get(instance.replication_key)):
-    #     singer.write_bookmark(state,
-    #                           stream.tap_stream_id,
-    #                           instance.replication_key)
-
     with metrics.record_counter(stream.tap_stream_id) as counter:
         for (stream, record) in instance.sync(state):
             counter.increment()

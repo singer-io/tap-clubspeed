@@ -231,7 +231,7 @@
     "eventTaskTypeId": "integer"
   },
   "event_task_types": {
-    "eventTaskTypeId": "integer",
+    "eventTaskId": "integer",
     "deleted": false,
     "seq": "integer",
     "description": "string",
