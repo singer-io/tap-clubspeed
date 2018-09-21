@@ -100,26 +100,34 @@ class Stream():
         return self.stream is not None
 
 
+    # The main sync function.
+    def sync(self, state):
+        get_data = getattr(self.client, self.name)
+        if self.replication_method == "INCREMENTAL":
+            bookmark = self.get_bookmark(state)
+            res = get_data(self.replication_key, bookmark)
+            for item in res:
+                if self.is_bookmark_old(state, item[self.replication_key]):
+                    yield (self.stream, item)
+        elif self.replication_method == "FULL_TABLE":
+            res = get_data()
+            for item in res:
+                yield (self.stream, item)
+        else:
+            raise Exception('Replication key not defined for {stream}'.format(self.name))
+
+
+
 class Booking(Stream):
     name = "booking"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["onlineBookingsId"]
-
-    def sync(self, state): 
-        bookings = self.client.booking()
-        for booking in bookings:
-            yield (self.stream, booking)
 
 
 class BookingAvailability(Stream):
     name = "booking_availability"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["heatId"]
-
-    def sync(self, state):
-        availabilities = self.client.booking_availability()
-        for availability in availabilities:
-            yield (self.stream, availability)
 
 
 class CheckDetails(Stream):
@@ -128,27 +136,12 @@ class CheckDetails(Stream):
     replication_key = "createdDate"
     key_properties = [ "checkDetailId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        check_details = self.client.check_details(self.replication_key, bookmark)
-        for check_detail in check_details:
-            if self.is_bookmark_old(state, check_detail[self.replication_key]):
-                yield (self.stream, check_detail)
-
-
 
 class Checks(Stream):
     name = "checks"
     replication_method = "INCREMENTAL"
     replication_key = "openedDate"
     key_properties = [ "checkId" ]
-
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        checks = self.client.checks(self.replication_key, bookmark)
-        for check in checks:
-            if self.is_bookmark_old(state, check[self.replication_key]):
-                yield (self.stream, check)
 
 
 class Customers(Stream):
@@ -157,26 +150,11 @@ class Customers(Stream):
     replication_key = "accountCreated"
     key_properties = [ "customerId" ]
 
-    # https://rpmstamford.clubspeedtiming.com/api/index.php/customers.json?key=Pc8BULWF4Mp8MSZv&page=1051&limit=100
-
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        customers = self.client.customers(self.replication_key, bookmark)
-        for customer in customers:
-            if self.is_bookmark_old(state, customer[self.replication_key]):
-                yield (self.stream, customer)
-
-
 
 class DiscountTypes(Stream):
     name = "discount_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["discountId"]
-
-    def sync(self, state):
-        discount_types = self.client.discount_types()
-        for discount_type in discount_types:
-            yield (self.stream, discount_type)
 
 
 class EventHeatDetails(Stream):
@@ -184,36 +162,18 @@ class EventHeatDetails(Stream):
     replication_method = "INCREMENTAL"
     replication_key = "added" 
     key_properties = [ "eventId" ]
-    # Key also could be "added". Docs are unclear.
-
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        event_heat_details = self.client.event_heat_details(self.replication_key, bookmark)
-        for event_heat_detail in event_heat_details:
-            if self.is_bookmark_old(state, event_heat_detail[self.replication_key]):
-                yield (self.stream, event_heat_detail)
 
 
 class EventHeatTypes(Stream):
     name = "event_heat_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["eventHeatTypeId"]
-
-    def sync(self, state):
-        event_heat_types = self.client.event_heat_types()
-        for event_heat_type in event_heat_types:
-            yield (self.stream, event_heat_type)
 
 
 class EventReservationLinks(Stream): 
     name = "event_reservation_links"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["eventReservationLinkId"]
-
-    def sync(self, state):
-        event_reservation_links = self.client.event_reservation_links()
-        for event_reservation_link in event_reservation_links:
-            yield (self.stream, event_reservation_link)
 
 
 class EventReservations(Stream):
@@ -222,36 +182,17 @@ class EventReservations(Stream):
     replication_key = "startTime"
     key_properties = [ "eventReservationId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        event_reservations = self.client.event_reservations(self.replication_key, bookmark)
-        for event_reservation in event_reservations:
-            if self.is_bookmark_old(state, event_reservation[self.replication_key]):
-                yield (self.stream, event_reservation)
-
-
 
 class EventReservationTypes(Stream):
     name = "event_reservation_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["eventReservationTypeId"]
-
-    def sync(self, state):
-        event_reservation_types = self.client.event_reservation_types()
-        for event_reservation_type in event_reservation_types:
-            yield (self.stream, event_reservation_type)
-
 
 
 class EventRounds(Stream):
     name = "event_rounds"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["eventRoundId"]
-
-    def sync(self, state):
-        event_rounds = self.client.event_rounds()
-        for event_round in event_rounds:
-            yield (self.stream, event_round)
 
 
 class Events(Stream):
@@ -260,23 +201,11 @@ class Events(Stream):
     replication_key = "createdHeatTime"
     key_properties = [ "eventId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        events = self.client.events(self.replication_key, bookmark)
-        for event in events:
-            if self.is_bookmark_old(state, event[self.replication_key]):
-                yield (self.stream, event)
-
 
 class EventStatuses(Stream):
     name = "event_statuses"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["eventStatusId"]
-
-    def sync(self, state):
-        event_statuses = self.client.event_statuses()
-        for event_status in event_statuses:
-            yield (self.stream, event_status)
 
 
 class EventTasks(Stream):
@@ -285,34 +214,17 @@ class EventTasks(Stream):
     replication_key = "completedAt"
     key_properties = [ "eventTaskId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        event_tasks = self.client.event_tasks(self.replication_key, bookmark)
-        for event_task in event_tasks:
-            if self.is_bookmark_old(state, event_task[self.replication_key]):
-                yield (self.stream, event_task)
-
 
 class EventTaskTypes(Stream):
     name = "event_task_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = [ "eventTaskTypeId" ]
-
-    def sync(self, state):
-        event_task_types = self.client.event_task_types()
-        for event_task_type in event_task_types:
-            yield (self.stream, event_task_type)
 
 
 class EventTypes(Stream):
     name = "event_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = [ "eventTypeId" ]
-
-    def sync(self, state):
-        event_types = self.client.event_types()
-        for event_type in event_types:
-            yield (self.stream, event_type)
 
 
 class GiftCardHistory(Stream):
@@ -321,26 +233,12 @@ class GiftCardHistory(Stream):
     replication_key = "transactionDate"
     key_properties = [ "giftCardHistoryId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        histories = self.client.gift_card_history(self.replication_key, bookmark)
-        for history in histories:
-            if self.is_bookmark_old(state, history[self.replication_key]):
-                yield (self.stream, history)
-
 
 class HeatDetails(Stream):
     name = "heat_details"
     replication_method = "INCREMENTAL"
     replication_key = "timeAdded"
     key_properties = [ "heatId" ]
-
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        heat_details = self.client.heat_details(self.replication_key, bookmark)
-        for heat_detail in heat_details:
-            if self.is_bookmark_old(state, heat_detail[self.replication_key]):
-                yield (self.stream, heat_detail)
 
 
 class HeatMain(Stream):
@@ -349,23 +247,11 @@ class HeatMain(Stream):
     replication_key = "heatId"
     key_properties = [ "heatId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        heat_main = self.client.heat_main(self.replication_key, bookmark)
-        for item in heat_main:
-            if self.is_bookmark_old(state, item[self.replication_key]):
-                yield (self.stream, item)
-
 
 class HeatTypes(Stream):
     name = "heat_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["heatTypesId"]
-
-    def sync(self, state):
-        heat_types = self.client.heat_types()
-        for heat_type in heat_types:
-            yield (self.stream, heat_type)
 
 
 
@@ -375,23 +261,11 @@ class Memberships(Stream):
     replication_key = "membershipTypeId"
     key_properties = [ "membershipTypeId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        memberships = self.client.memberships(self.replication_key, bookmark)
-        for item in memberships:
-            if self.is_bookmark_old(state, item[self.replication_key]):
-                yield (self.stream, item)
-
 
 class MembershipTypes(Stream):
     name = "membership_types"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["membershipTypeId"]
-
-    def sync(self, state):
-        membership_types = self.client.membership_types()
-        for membership_type in membership_types:
-            yield (self.stream, membership_type)
 
 
 class Payments(Stream):
@@ -400,34 +274,17 @@ class Payments(Stream):
     replication_key = "payDate"
     key_properties = [ "paymentId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        payments = self.client.payments(self.replication_key, bookmark)
-        for item in payments:
-            if self.is_bookmark_old(state, item[self.replication_key]):
-                yield (self.stream, item)
-
 
 class ProductClasses(Stream):
     name = "product_classes"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["productClassId"]
-
-    def sync(self, state):
-        product_classes = self.client.product_classes()
-        for product_class in product_classes:
-            yield (self.stream, product_class)
 
 
 class Products(Stream):
     name = "products"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["productId"]
-
-    def sync(self, state):
-        products = self.client.products()
-        for product in products:
-            yield (self.stream, product)
 
 
 # class Racers(Stream):
@@ -439,46 +296,23 @@ class Reservations(Stream):
     replication_key = "createdAt"
     key_properties = [ "onlineBookingReservationsId" ]
 
-    def sync(self, state):
-        bookmark = self.get_bookmark(state)
-        reservations = self.client.reservations(self.replication_key, bookmark)
-        for item in reservations:
-            if self.is_bookmark_old(state, item[self.replication_key]):
-                yield (self.stream, item)
-
 
 class Sources(Stream):
     name = "sources"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["sourceId"]
-
-    def sync(self, state):
-        sources = self.client.sources()
-        for source in sources:
-            yield (self.stream, source)
 
 
 class Taxes(Stream):
     name = "taxes"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["taxId"]
-
-    def sync(self, state):
-        taxes = self.client.taxes()
-        for tax in taxes:
-            yield (self.stream, tax)
 
 
 class Users(Stream):
     name = "users"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
     key_properties = ["userId"]
-
-    def sync(self, state):
-        users = self.client.users()
-        for user in users:
-            yield (self.stream, user)
-
 
 
 
