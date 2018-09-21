@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='tap-clubspeed',
-      version='0.2.0',
+      version='0.2.1',
       description='Singer.io tap for extracting data from the Clubspeed API',
       author='lambtron',
       author_email="andyjiang@gmail.com",
