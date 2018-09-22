@@ -46,7 +46,7 @@ class Stream():
     def update_bookmark(self, state, value):
         current_bookmark = self.get_bookmark(state)
         if value and needs_parse_to_date(value) and needs_parse_to_date(current_bookmark):
-            if utils.strptime_with_tz(value) > utils.striptime_with_tz(current_bookmark):
+            if utils.strptime_with_tz(value) > utils.strptime_with_tz(current_bookmark):
                 singer.write_bookmark(state, self.name, self.replication_key, value)
         elif current_bookmark is None:
             singer.write_bookmark(state, self.name, self.replication_key, value)
