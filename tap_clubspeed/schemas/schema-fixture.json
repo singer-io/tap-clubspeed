@@ -131,7 +131,7 @@
     "waiver": "integer",
     "waiver2": "integer",
     "webUserName": "string",
-    "Zip": "12345"
+    "Zip": "string"
   },
   "discount_types": {
     "discountId": "integer",

@@ -310,7 +310,7 @@
     "Zip": {
       "type": [
         "null",
-        "number"
+        "string"
       ]
     }
   }
