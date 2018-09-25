@@ -104,17 +104,25 @@ class Stream():
     # The main sync function.
     def sync(self, state):
         get_data = getattr(self.client, self.name)
+
+        bookmark = self.get_bookmark(state)
+
+        res = get_data(self.replication_key, bookmark)
+
         if self.replication_method == "INCREMENTAL":
-            bookmark = self.get_bookmark(state)
-            res = get_data(self.replication_key, bookmark)
             for item in res:
-                if self.is_bookmark_old(state, item[self.replication_key]):
-                    self.update_bookmark(state, item[self.replication_key])
-                    yield (self.stream, item)
+                try:
+                    if self.is_bookmark_old(state, item[self.replication_key]):
+                        self.update_bookmark(state, item[self.replication_key])
+                        yield (self.stream, item)
+                except Exception as e:
+                    logger.error('Handled exception: {error}'.format(error=str(e)))
+                    continue
+
         elif self.replication_method == "FULL_TABLE":
-            res = get_data()
             for item in res:
                 yield (self.stream, item)
+
         else:
             raise Exception('Replication key not defined for {stream}'.format(self.name))
 

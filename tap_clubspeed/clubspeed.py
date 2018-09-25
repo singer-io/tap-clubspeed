@@ -70,10 +70,8 @@ class Clubspeed(object):
         while length > 0:
             endpoint = self._add_pagination(endpoint)
             res = self._get(endpoint)
-            if key is not None:
-                res = res[key]
-            if res is not None:
-                length = len(res)
+            res = res[key] if key is not None else res
+            length = len(res) if res is not None else length
             for item in res:
                 yield item
 

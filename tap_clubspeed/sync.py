@@ -15,16 +15,15 @@ def sync_stream(state, instance):
         for (stream, record) in instance.sync(state):
             counter.increment()
 
-            # SCHEMA_GEN: Comment out transform
-            with Transformer() as transformer:
-                record = transformer.transform(record, stream.schema.to_dict(), metadata.to_map(stream.metadata))
+            try:
+                with Transformer() as transformer:
+                    record = transformer.transform(record, stream.schema.to_dict(), metadata.to_map(stream.metadata))
+                singer.write_record(stream.tap_stream_id, record)
+                if instance.replication_method == "INCREMENTAL":
+                    singer.write_state(state)
 
-            singer.write_record(stream.tap_stream_id, record)
-            # NB: We will only write state at the end of a stream's sync:
-            #  We may find out that there exists a sync that takes too long and can never emit a bookmark
-            #  but we don't know if we can guarentee the order of emitted records.
-
-        if instance.replication_method == "INCREMENTAL":
-            singer.write_state(state)
+            except Exception as e:
+                LOGGER.error('Handled exception: {error}'.format(error=str(e)))
+                continue
 
         return counter.value
