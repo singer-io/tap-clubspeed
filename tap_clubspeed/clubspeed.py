@@ -72,7 +72,8 @@ class Clubspeed(object):
             res = self._get(endpoint)
             if key is not None:
                 res = res[key]
-            length = len(res)
+            if res is not None:
+                length = len(res)
             for item in res:
                 yield item
 

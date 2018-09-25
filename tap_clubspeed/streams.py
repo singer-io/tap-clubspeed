@@ -62,7 +62,7 @@ class Stream():
             if utils.strptime_with_tz(value) >= utils.strptime_with_tz(current_bookmark):
                 return True
         else:
-            if value >= current_bookmark:
+            if int(value) >= int(current_bookmark):
                 return True
         return False
 
@@ -200,7 +200,7 @@ class EventRounds(Stream):
 class Events(Stream):
     name = "events"
     replication_method = "INCREMENTAL"
-    replication_key = "createdHeatTime"
+    replication_key = "eventScheduledTime"
     key_properties = [ "eventId" ]
 
 
