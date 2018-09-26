@@ -5,6 +5,10 @@ import logging
 logger = logging.getLogger()
 
 
+class IgnoreHttpException(Exception):
+    pass
+
+
 class Clubspeed(object):
 
 
@@ -23,9 +27,8 @@ class Clubspeed(object):
     def _get(self, url, **kwargs):
         logger.info("Hitting endpoint {url}".format(url=url))
         response = requests.get(url)
-        logger.info("  Response is {status}".format(status=response.status_code))
         if response.status_code == 500:
-            return []
+            raise IgnoreHttpException("http status is 500.")
         response.raise_for_status()
         return response.json()
 
@@ -69,11 +72,16 @@ class Clubspeed(object):
         length = 1
         while length > 0:
             endpoint = self._add_pagination(endpoint)
-            res = self._get(endpoint)
-            res = res[key] if key is not None else res
-            length = len(res) if len(res) > 0 else length
-            for item in res:
-                yield item
+            try:
+                res = self._get(endpoint)
+                res = res[key] if key is not None else res
+                length = len(res)
+                logger.info('Endpoint returned {length} rows.'.format(length=length))
+                for item in res:
+                    yield item
+            except Exception:
+                logger.info('Encountered 500, will ignore.')
+                continue
 
 
     def is_authorized(self):
