@@ -25,12 +25,17 @@ release:
 schema:
 	@node generate-schema.js
 
+# Test.
+test:
+	@python3 tests/test_tap_clubspeed.py
+
 #
 # Phonies.
 #
 
-.PHONY: test
 .PHONY: build
 .PHONY: dev
+.PHONY: release
 .PHONY: schema
+.PHONY: test
 
