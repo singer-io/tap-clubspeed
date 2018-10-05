@@ -266,7 +266,8 @@ class HeatTypes(Stream):
 
 class Memberships(Stream):
     name = "memberships"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
+    replication_key = "changed"
     key_properties = [ "membershipTypeId" ]
 
 
