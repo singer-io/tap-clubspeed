@@ -150,14 +150,21 @@ class CheckDetails(Stream):
 class Checks(Stream):
     name = "checks"
     replication_method = "INCREMENTAL"
-    replication_key = "openedDate"
+    replication_key = "closedDate"
+    key_properties = [ "checkId" ]
+
+
+class CheckTotals(Stream):
+    name = "check_totals"
+    replication_method = "INCREMENTAL"
+    replication_key = "closedDate"
     key_properties = [ "checkId" ]
 
 
 class Customers(Stream):
     name = "customers"
     replication_method = "INCREMENTAL"
-    replication_key = "accountCreated"
+    replication_key = "lastVisited"
     key_properties = [ "customerId" ]
 
 
@@ -247,13 +254,14 @@ class GiftCardHistory(Stream):
 class HeatDetails(Stream):
     name = "heat_details"
     replication_method = "INCREMENTAL"
-    replication_key = "timeAdded"
+    replication_key = "positionEditedDate"
     key_properties = [ "heatId" ]
 
 
 class HeatMain(Stream):
     name = "heat_main"
-    replication_method = "FULL_TABLE"
+    replication_method = "INCREMENTAL"
+    replication_key = "finish"
     key_properties = [ "heatId" ]
 
 
@@ -281,6 +289,13 @@ class Payments(Stream):
     name = "payments"
     replication_method = "INCREMENTAL"
     replication_key = "payDate"
+    key_properties = [ "paymentId" ]
+
+
+class PaymentsVoided(Stream):
+    name = "payments_voided"
+    replication_method = "INCREMENTAL"
+    replication_key = "voidDate"
     key_properties = [ "paymentId" ]
 
 
@@ -327,6 +342,7 @@ STREAMS = {
     "booking_availability": BookingAvailability,
     "check_details": CheckDetails,
     "checks": Checks,
+    "check_totals": CheckTotals,
     "customers": Customers,
     "discount_types": DiscountTypes,
     "event_heat_details": EventHeatDetails,
@@ -347,6 +363,7 @@ STREAMS = {
     "memberships": Memberships,
     "membership_types": MembershipTypes,
     "payments": Payments,
+    "payments_voided": PaymentsVoided,
     "product_classes": ProductClasses,
     "products": Products,
     "reservations": Reservations,

@@ -59,12 +59,18 @@ class Clubspeed(object):
 
 
     def _add_filter(self, endpoint, api_version, column_name, bookmark):
-        if bookmark is None or column_name is None:
+        if column_name is None:
+            return endpoint
+        if bookmark is None:
+            if api_version == 'V2':
+                endpoint += '&where={{"{column_name}":{{"$isnot":"null"}}}}&order={column_name} ASC'.format(column_name=column_name)
+            else:
+                endpoint += '&filter={column_name} IS NOT NULL&order={column_name} ASC'.format(column_name=column_name)
             return endpoint
         if api_version == 'V2':
-            endpoint += '&where={{"{column_name}":{{"$gt":"{bookmark}"}}}}'.format(column_name=column_name, bookmark=bookmark)
+            endpoint += '&where={{"{column_name}":{{"$gt":"{bookmark}"}}}}&order={column_name} ASC'.format(column_name=column_name, bookmark=bookmark)
         else:
-            endpoint += '&filter={column_name}>{bookmark}'.format(column_name=column_name, bookmark=bookmark)
+            endpoint += '&filter={column_name} > {bookmark}&order={column_name} ASC'.format(column_name=column_name, bookmark=bookmark)
         return endpoint
 
 
@@ -103,19 +109,19 @@ class Clubspeed(object):
 
     def check_details(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checkDetails')
-        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
         return self._get_response(endpoint, 'checkDetails')
 
 
     def checks(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checks')
-        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
         return self._get_response(endpoint, 'checks')
 
 
     def check_totals(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('checkTotals')
-        endpoint = self._add_filter(endpoint, 'V1', column_name, bookmark)
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
         return self._get_response(endpoint)
 
 
@@ -234,6 +240,12 @@ class Clubspeed(object):
 
 
     def payments(self, column_name=None, bookmark=None):
+        endpoint = self._construct_endpoint('payments')
+        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
+        return self._get_response(endpoint)
+
+
+    def payments_voided(self, column_name=None, bookmark=None):
         endpoint = self._construct_endpoint('payments')
         endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
         return self._get_response(endpoint)
