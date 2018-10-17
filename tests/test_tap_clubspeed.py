@@ -23,13 +23,12 @@ class TestClubspeed(unittest.TestCase):
         next_paginated_endpoint = endpoint + '&page=1&limit=100'
         self.assertEqual(next_paginated_endpoint, client._add_pagination(paginated_endpoint))
 
-
     def test_add_filter(self):
         client = Clubspeed("subdomain", "private_key")
         endpoint = client._construct_endpoint('path')
-        filtered_endpoint_v2 = endpoint + '&where={"column_name":{"$gt":"bookmark"}}'
+        filtered_endpoint_v2 = endpoint + '&where={"column_name":{"$gt":"bookmark"}}&order=column_name ASC'
         self.assertEqual(filtered_endpoint_v2, client._add_filter(endpoint, 'V2', 'column_name', 'bookmark'))
-        filtered_endpoint_v1 = endpoint + '&filter=column_name>bookmark'
+        filtered_endpoint_v1 = endpoint + '&filter=column_name > bookmark&order=column_name ASC'
         self.assertEqual(filtered_endpoint_v1, client._add_filter(endpoint, 'V1', 'column_name', 'bookmark'))
 
 

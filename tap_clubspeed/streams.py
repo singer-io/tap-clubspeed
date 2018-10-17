@@ -342,7 +342,6 @@ STREAMS = {
     "booking_availability": BookingAvailability,
     "check_details": CheckDetails,
     "checks": Checks,
-    "check_totals": CheckTotals,
     "customers": Customers,
     "discount_types": DiscountTypes,
     "event_heat_details": EventHeatDetails,

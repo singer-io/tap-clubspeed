@@ -21,7 +21,7 @@ class Clubspeed(object):
         self.private_key = private_key
         self._url_template = "{protocol}://{subdomain}.{domain}/{api_prefix}{path}.json?key={private_key}"
         self._limit = 100
-
+        self._test = False
 
 
     def _get(self, url, **kwargs):
@@ -42,7 +42,7 @@ class Clubspeed(object):
                                          private_key=self.private_key)
 
 
-    def _add_pagination(self, endpoint):
+    def _set_page_in_endpoint(self, endpoint, page):
         if "&page=" not in endpoint:
             endpoint += "&page=0&limit={limit}".format(limit=self._limit)
         else:
@@ -50,8 +50,6 @@ class Clubspeed(object):
             index = 0
             while index < len(array):
                 if "page=" in array[index]:
-                    page = int(array[index].split('=', 1)[1])
-                    page += 1
                     array[index] = "page=" + str(page)
                 index += 1
             endpoint = '&'.join(array)
@@ -76,8 +74,9 @@ class Clubspeed(object):
 
     def _get_response(self, endpoint, key=None):
         length = 1
+        page = 0
         while length > 0:
-            endpoint = self._add_pagination(endpoint)
+            endpoint = self._set_page_in_endpoint(endpoint, page)
             try:
                 res = self._get(endpoint)
                 res = res[key] if key is not None else res
@@ -88,6 +87,9 @@ class Clubspeed(object):
             except Exception:
                 logger.info('Encountered 500, will ignore.')
                 continue
+            if self._test and page >= 5:
+                break
+            page += 1
 
 
     def is_authorized(self):
