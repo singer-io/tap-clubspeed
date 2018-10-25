@@ -84,9 +84,9 @@ class Clubspeed(object):
                 logger.info('Endpoint returned {length} rows.'.format(length=length))
                 for item in res:
                     yield item
-            except Exception:
+            except IgnoreHttpException:
                 logger.info('Encountered 500, will ignore.')
-                continue
+                pass
             if self._test and page >= 5:
                 break
             page += 1
