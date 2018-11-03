@@ -19,6 +19,7 @@ class Clubspeed(object):
         self.subdomain = subdomain
         self.api_prefix = 'api/index.php/'
         self.private_key = private_key
+        self._new_heats = []
         self._url_template = "{protocol}://{subdomain}.{domain}/{api_prefix}{path}.json?key={private_key}"
         self._limit = 100
         self._test = False
@@ -83,11 +84,13 @@ class Clubspeed(object):
                 length = len(res)
                 logger.info('Endpoint returned {length} rows.'.format(length=length))
                 for item in res:
+                    if 'heatMain' in endpoint and 'heatId' in item:
+                        self._new_heats.append(item['heatId'])
                     yield item
             except IgnoreHttpException:
                 logger.info('Encountered 500, will ignore.')
                 pass
-            if self._test and page >= 5:
+            if self._test and page >= 2:
                 break
             page += 1
 
@@ -211,13 +214,35 @@ class Clubspeed(object):
         return self._get_response(endpoint)
 
 
-    def heat_details(self, column_name=None, bookmark=None):
-        endpoint = self._construct_endpoint('heatDetails')
-        endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
-        return self._get_response(endpoint)
+    # Note: This function pulls `heat_details` from the API, but since
+    # the API doesn't have a `last_edited_at` field, we use `heat_main.finish`
+    # to determine when to pull `heat_details`.
+    def heat_main_details(self, column_name=None, bookmark=None):
+        endpoints = []
+        idx = 0
+        query = ''
+        endpoint_base = self._construct_endpoint('heatDetails')
+
+        # Using `heat_id`s, create array of endpoints for `heat_details`
+        for heat_id in self._new_heats[:-1]:
+            query += '{{"heatId":{heat_id}}}'.format(heat_id=heat_id)
+            if (idx is not 0 and idx % 30 == 0) or idx == len(self._new_heats) - 1:
+                endpoint = endpoint_base + '&where={{"$or":[{query}]}}&order={column_name} ASC'.format(query=query, column_name='heatId')
+                endpoints.append(endpoint)
+                query = ''
+            else:
+                query += ','
+            idx += 1
+
+        # Yield all results from endpoints.
+        for endpoint in endpoints:
+            gtr = self._get_response(endpoint)
+            for item in gtr:
+                yield item
 
 
     def heat_main(self, column_name=None, bookmark=None):
+        self._new_heats = []
         endpoint = self._construct_endpoint('heatMain')
         endpoint = self._add_filter(endpoint, 'V2', column_name, bookmark)
         return self._get_response(endpoint)

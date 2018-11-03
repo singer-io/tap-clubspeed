@@ -251,17 +251,17 @@ class GiftCardHistory(Stream):
     key_properties = [ "giftCardHistoryId" ]
 
 
-class HeatDetails(Stream):
-    name = "heat_details"
-    replication_method = "INCREMENTAL"
-    replication_key = "positionEditedDate"
-    key_properties = [ "heatId" ]
-
-
 class HeatMain(Stream):
     name = "heat_main"
     replication_method = "INCREMENTAL"
     replication_key = "finish"
+    key_properties = [ "heatId" ]
+
+
+class HeatMainDetails(Stream):
+    name = "heat_main_details"
+    replication_method = "INCREMENTAL"
+    replication_key = "positionEditedDate"
     key_properties = [ "heatId" ]
 
 
@@ -356,8 +356,8 @@ STREAMS = {
     "event_task_types": EventTaskTypes,
     "event_types": EventTypes,
     "gift_card_history": GiftCardHistory,
-    "heat_details": HeatDetails,
     "heat_main": HeatMain,
+    "heat_main_details": HeatMainDetails,
     "heat_types": HeatTypes,
     "memberships": Memberships,
     "membership_types": MembershipTypes,

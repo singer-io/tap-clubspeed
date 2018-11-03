@@ -262,23 +262,6 @@
     "ipAddress": "string",
     "transactionDate": "2015-12-02T09:01:46.00"
   },
-  "heat_details": {
-    "heatId": "integer",
-    "customerId": "integer",
-    "autoNo": "integer",
-    "finishPosition": "integer",
-    "firstTime": true,
-    "groupFinishPosition": "integer",
-    "groupId": "integer",
-    "lineUpPosition": "integer",
-    "pointHistoryId": "integer",
-    "positionEditedDate": "2013-11-26T00:18:42.43",
-    "proskill": "integer",
-    "proskillDiff": "integer",
-    "scores": "number",
-    "timeAdded": "2013-11-26T00:18:42.43",
-    "userId": "integer"
-  },
   "heat_main": {
     "heatId": "integer",
     "beginning": "2013-11-26T00:18:42.43",
@@ -299,6 +282,23 @@
     "track": "integer",
     "type": "integer",
     "winBy": "integer"
+  },
+  "heat_main_details": {
+    "heatId": "integer",
+    "customerId": "integer",
+    "autoNo": "integer",
+    "finishPosition": "integer",
+    "firstTime": true,
+    "groupFinishPosition": "integer",
+    "groupId": "integer",
+    "lineUpPosition": "integer",
+    "pointHistoryId": "integer",
+    "positionEditedDate": "2013-11-26T00:18:42.43",
+    "proskill": "integer",
+    "proskillDiff": "integer",
+    "scores": "number",
+    "timeAdded": "2013-11-26T00:18:42.43",
+    "userId": "integer"
   },
   "heat_types": {
     "heatTypesId": "integer",
