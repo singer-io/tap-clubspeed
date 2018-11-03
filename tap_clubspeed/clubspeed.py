@@ -43,7 +43,7 @@ class Clubspeed(object):
                                          private_key=self.private_key)
 
 
-    def _set_page_in_endpoint(self, endpoint, page):
+    def _set_page_in_endpoint(self, endpoint, page=0):
         if "&page=" not in endpoint:
             endpoint += "&page=0&limit={limit}".format(limit=self._limit)
         else:

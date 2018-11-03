@@ -19,9 +19,9 @@ class TestClubspeed(unittest.TestCase):
         client = Clubspeed("subdomain", "private_key")
         endpoint = client._construct_endpoint('path')
         paginated_endpoint = endpoint + '&page=0&limit=100'
-        self.assertEqual(paginated_endpoint, client._add_pagination(endpoint))
+        self.assertEqual(paginated_endpoint, client._set_page_in_endpoint(endpoint))
         next_paginated_endpoint = endpoint + '&page=1&limit=100'
-        self.assertEqual(next_paginated_endpoint, client._add_pagination(paginated_endpoint))
+        self.assertEqual(next_paginated_endpoint, client._set_page_in_endpoint(paginated_endpoint, 1))
 
     def test_add_filter(self):
         client = Clubspeed("subdomain", "private_key")
