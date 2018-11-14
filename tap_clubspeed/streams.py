@@ -55,6 +55,8 @@ class Stream():
     # This function returns boolean and checks if
     # book mark is old.
     def is_bookmark_old(self, state, value):
+        if value is None:
+            return True
         current_bookmark = self.get_bookmark(state)
         if current_bookmark is None:
             return True
@@ -258,10 +260,16 @@ class HeatMain(Stream):
     key_properties = [ "heatId" ]
 
 
+#
+# This table uses heat_main's bookmark as it's bookmark,
+# but to allow this to work, we give the replication_key
+# an intentional "None".
+#
+
 class HeatMainDetails(Stream):
     name = "heat_main_details"
     replication_method = "INCREMENTAL"
-    replication_key = "positionEditedDate"
+    replication_key = "None"
     key_properties = [ "heatId" ]
 
 
@@ -269,7 +277,6 @@ class HeatTypes(Stream):
     name = "heat_types"
     replication_method = "FULL_TABLE"
     key_properties = ["heatTypesId"]
-
 
 
 class Memberships(Stream):
