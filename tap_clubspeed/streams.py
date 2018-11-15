@@ -55,8 +55,6 @@ class Stream():
     # This function returns boolean and checks if
     # book mark is old.
     def is_bookmark_old(self, state, value):
-        if value is None:
-            return True
         current_bookmark = self.get_bookmark(state)
         if current_bookmark is None:
             return True
@@ -117,9 +115,15 @@ class Stream():
                     if self.is_bookmark_old(state, item[self.replication_key]):
                         self.update_bookmark(state, item[self.replication_key])
                         yield (self.stream, item)
+
+                except KeyError:
+                    logger.info('Bookmark doesn\'t exist: syncing row.')
+                    yield (self.stream, item)
+                    pass
+
                 except Exception as e:
                     logger.error('Handled exception: {error}'.format(error=str(e)))
-                    continue
+                    pass
 
         elif self.replication_method == "FULL_TABLE":
             for item in res:
