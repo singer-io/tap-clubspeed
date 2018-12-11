@@ -106,3 +106,5 @@ Incremental replication works in conjunction with a state file to only extract n
 ```
 $ make test
 ```
+
+Copyright &copy; 2018 Stitch
