@@ -2,20 +2,39 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.5.6-jessie-browsers
+      - image: 218546966473.dkr.ecr.us-east-1.amazonaws.com/circle-ci:stitch-tap-tester-uv
     steps:
       - checkout
       - run:
           name: 'Setup virtual env'
           command: |
-            virtualenv -p python3 ~/.virtualenvs/tap-clubspeed
-            source ~/.virtualenvs/tap-clubspeed/bin/activate
-            pip install .
-            pip install pylint
-            pylint tap_clubspeed -d C,R,W
+            uv venv --python 3.9 /usr/local/share/virtualenvs/tap-clubspeed
+            source /usr/local/share/virtualenvs/tap-clubspeed
+            uv pip install .
+            uv pip install pylint
+            uv pylint tap_clubspeed -d C,R,W
       - run:
           name: 'Unit Tests'
           command: |
-            source ~/.virtualenvs/tap-clubspeed/bin/activate
-            pip install nose
-            nosetests
+            source /usr/local/share/virtualenvs/tap-clubspeed
+            uv pip install pytest coverage
+            coverage run -m pytests tests
+            coverage html
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build:
+          context: circleci-user
+  build_daily:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build:
+          context: circleci-user
