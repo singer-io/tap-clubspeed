@@ -22,7 +22,7 @@ jobs:
           command: |
             source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
             uv pip install pytest coverage
-            coverage run -m pytests tests
+            coverage run -m pytest tests
             coverage html
 
 workflows:
