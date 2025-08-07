@@ -20,7 +20,7 @@ jobs:
       - run:
           name: 'Unit Tests'
           command: |
-            source /usr/local/share/virtualenvs/tap-clubspeed
+            source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
             uv pip install pytest coverage
             coverage run -m pytests tests
             coverage html
