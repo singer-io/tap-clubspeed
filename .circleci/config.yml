@@ -11,8 +11,12 @@ jobs:
             uv venv --python 3.9 /usr/local/share/virtualenvs/tap-clubspeed
             source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
             uv pip install .
+      - run:
+          name: 'pylint'
+          command: |
+            source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
             uv pip install pylint
-            uv pylint tap_clubspeed -d C,R,W
+            pylint tap_clubspeed -d C,R,W
       - run:
           name: 'Unit Tests'
           command: |
