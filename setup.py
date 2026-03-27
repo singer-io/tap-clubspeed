@@ -11,8 +11,8 @@ setup(name='tap-clubspeed',
       classifiers=['Programming Language :: Python :: 3 :: Only'],
       py_modules=['tap_clubspeed'],
       install_requires=[
-          'singer-python==5.14.3',
-          'requests==2.32.5'
+          'singer-python==6.8.0',
+          'requests==2.33.0'
       ],
       entry_points='''
           [console_scripts]
