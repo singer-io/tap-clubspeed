@@ -7,8 +7,6 @@ is on or after the configured start_date (via bookmark semantics).
 import unittest
 from unittest.mock import patch, MagicMock
 
-import singer
-
 try:
     from .base import ClubspeedBaseTest, MockResponse
 except ImportError:
