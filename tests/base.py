@@ -7,6 +7,8 @@ in each test class. No tap-tester or Singer/Stitch infrastructure required.
 import json
 import os
 
+import requests
+
 
 class MockResponse:
     """Minimal requests.Response stand-in."""
@@ -20,7 +22,11 @@ class MockResponse:
 
     def raise_for_status(self):
         if self.status_code >= 400:
-            raise Exception(f"HTTP {self.status_code}")
+            http_error = requests.exceptions.HTTPError(
+                f"HTTP {self.status_code}"
+            )
+            http_error.response = self
+            raise http_error
 
 
 class ClubspeedBaseTest:
