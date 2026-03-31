@@ -7,8 +7,6 @@ Patches tap_clubspeed.clubspeed.requests.get so no real HTTP calls are made.
 import unittest
 from unittest.mock import patch, MagicMock
 
-import singer
-
 try:
     from .base import ClubspeedBaseTest
 except ImportError:
