@@ -8,7 +8,7 @@ import singer
 
 from tap_clubspeed.sync import sync_stream
 from tap_clubspeed.streams import (
-    Stream, Booking, Checks, Customers, HeatMain
+    Booking, Checks, Customers
 )
 
 
