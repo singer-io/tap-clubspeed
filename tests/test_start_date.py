@@ -15,7 +15,7 @@ except ImportError:
     from base import ClubspeedBaseTest, MockResponse
 
 from tap_clubspeed.clubspeed import Clubspeed
-from tap_clubspeed.streams import Checks, Customers, Payments, Reservations
+from tap_clubspeed.streams import Checks, Customers
 from tap_clubspeed.sync import sync_stream
 
 
