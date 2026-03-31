@@ -132,8 +132,9 @@ class TestSyncStreamIncremental(unittest.TestCase):
         sync_stream(state, instance)
         self.assertEqual(2, mock_write_state.call_count)
 
+    @patch("tap_clubspeed.sync.singer.write_state")
     @patch("tap_clubspeed.sync.singer.write_record")
-    def test_transform_exception_is_handled_without_crash(self, mock_write_record):
+    def test_transform_exception_is_handled_without_crash(self, mock_write_record, mock_write_state):
         """A transform exception is caught and logged; sync continues."""
         records = [{"checkId": "bad-data"}, {"checkId": 2, "closedDate": "2023-01-01 00:00:00"}]
         instance = _make_stream_instance(Checks, records, replication_key="closedDate")
