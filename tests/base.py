@@ -307,9 +307,6 @@ class ClubspeedBaseTest:
         self.config = self.get_mock_config()
         self.state = {}
 
-    def tearDown(self):
-        pass
-
     @staticmethod
     def get_mock_config():
         """Dummy config — no real credentials. Safe for CI use."""
@@ -317,10 +314,6 @@ class ClubspeedBaseTest:
             "subdomain": "mock_subdomain",
             "private_key": "mock_private_key",
         }
-
-    @staticmethod
-    def get_mock_state():
-        return {}
 
     # ── Schema-driven mock-data generation ───────────────────────────────
 
@@ -404,5 +397,17 @@ class ClubspeedBaseTest:
         """
         responses = [cls.make_get_response(page, key) for page in pages]
         # Append the terminal empty page
-        responses.append(cls.make_get_response([] if key is None else [], key))
+        responses.append(cls.make_get_response([], key))
         return responses
+
+    @staticmethod
+    def _make_catalog_stream(stream_name, schema=None):
+        """Build a minimal mock catalog stream object for use in sync tests."""
+        from unittest.mock import MagicMock
+        if schema is None:
+            schema = {"properties": {}, "type": "object"}
+        cs = MagicMock()
+        cs.tap_stream_id = stream_name
+        cs.schema.to_dict.return_value = schema
+        cs.metadata = []
+        return cs

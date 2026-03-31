@@ -18,24 +18,6 @@ from tap_clubspeed.clubspeed import Clubspeed
 class ClubspeedPaginationTest(ClubspeedBaseTest, unittest.TestCase):
     """Verify tap-clubspeed handles multi-page API responses correctly."""
 
-    def _make_pages(self, stream_name, key=None, page_sizes=None):
-        """
-        Build a list of MockResponse objects for the given page sizes.
-        The final response is always empty to terminate pagination.
-        """
-        if page_sizes is None:
-            page_sizes = [100, 50]
-        pages = []
-        for size in page_sizes:
-            records = [
-                self._generate_stream_record(stream_name)
-                for _ in range(size)
-            ]
-            pages.append(self.make_get_response(records, key))
-        # Terminal empty page
-        pages.append(self.make_get_response([] if key is None else [], key))
-        return pages
-
     # ── _get_response pagination loop ────────────────────────────────────
 
     @patch("tap_clubspeed.clubspeed.requests.get")
@@ -158,22 +140,16 @@ class ClubspeedPaginationTest(ClubspeedBaseTest, unittest.TestCase):
     @patch("tap_clubspeed.clubspeed.requests.get")
     def test_500_error_during_pagination_is_ignored_and_continues(self, mock_get):
         """IgnoreHttpException on a page is swallowed and pagination continues."""
-        from tap_clubspeed.clubspeed import IgnoreHttpException
-
-        # Page 1 returns 500, page 2 returns data, page 3 is empty
-        mock_resp_500 = MockResponse([], 500)
-        mock_resp_500.raise_for_status = lambda: None  # _get checks status == 500 directly
-
         mock_get.side_effect = [
-            mock_resp_500,  # 500 → IgnoreHttpException
+            MockResponse([], 500),      # 500 → IgnoreHttpException
             MockResponse([{"checkId": 42}]),
             MockResponse([]),
         ]
 
         client = Clubspeed("myclub", "secret")
         endpoint = client._construct_endpoint("checks")
-        # _get raises IgnoreHttpException on 500 before raise_for_status
-        # _get_response catches it and continues, so next page should still be fetched
+        # _get raises IgnoreHttpException on 500 before raise_for_status.
+        # _get_response catches it and continues, so the next page is still fetched.
         results = list(client._get_response(endpoint))
 
         self.assertIn({"checkId": 42}, results)

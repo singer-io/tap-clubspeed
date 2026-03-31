@@ -226,7 +226,7 @@ class Clubspeed(object):
         # Using `heat_id`s, create array of endpoints for `heat_details`
         for heat_id in self._new_heats:
             query += '{{"heatId":{heat_id}}}'.format(heat_id=heat_id)
-            if (idx is not 0 and idx % 30 == 0) or idx == len(self._new_heats) - 1:
+            if (idx != 0 and idx % 30 == 0) or idx == len(self._new_heats) - 1:
                 endpoint = endpoint_base + '&where={{"$or":[{query}]}}&order={column_name} ASC'.format(query=query, column_name='heatId')
                 endpoints.append(endpoint)
                 query = ''

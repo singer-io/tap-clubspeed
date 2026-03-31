@@ -10,21 +10,13 @@ from unittest.mock import patch, MagicMock
 import singer
 
 try:
-    from .base import ClubspeedBaseTest, MockResponse
+    from .base import ClubspeedBaseTest
 except ImportError:
-    from base import ClubspeedBaseTest, MockResponse
+    from base import ClubspeedBaseTest
 
 from tap_clubspeed.clubspeed import Clubspeed
 from tap_clubspeed.streams import Checks, Payments, Booking
 from tap_clubspeed.sync import sync_stream
-
-
-def _make_catalog_stream(stream_name, schema):
-    cs = MagicMock()
-    cs.tap_stream_id = stream_name
-    cs.schema.to_dict.return_value = schema
-    cs.metadata = []
-    return cs
 
 
 CHECKS_SCHEMA = {
@@ -68,7 +60,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client.checks.return_value = iter(all_records)
 
         instance = Checks(client)
-        instance.stream = _make_catalog_stream("checks", CHECKS_SCHEMA)
+        instance.stream = self._make_catalog_stream("checks", CHECKS_SCHEMA)
 
         interrupted_state = {
             "bookmarks": {"checks": {"closedDate": INTERRUPTED_BOOKMARK}}
@@ -105,7 +97,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client.checks.return_value = iter(records)
 
         instance = Checks(client)
-        instance.stream = _make_catalog_stream("checks", CHECKS_SCHEMA)
+        instance.stream = self._make_catalog_stream("checks", CHECKS_SCHEMA)
 
         interrupted_state = {
             "bookmarks": {"checks": {"closedDate": INTERRUPTED_BOOKMARK}}
@@ -136,7 +128,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client.checks.return_value = iter(records)
 
         instance = Checks(client)
-        instance.stream = _make_catalog_stream("checks", CHECKS_SCHEMA)
+        instance.stream = self._make_catalog_stream("checks", CHECKS_SCHEMA)
 
         state = {"bookmarks": {"checks": {"closedDate": INTERRUPTED_BOOKMARK}}}
         sync_stream(state, instance)
@@ -169,7 +161,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client_checks = MagicMock(spec=Clubspeed)
         client_checks.checks.return_value = iter(checks_records)
         instance_checks = Checks(client_checks)
-        instance_checks.stream = _make_catalog_stream("checks", CHECKS_SCHEMA)
+        instance_checks.stream = self._make_catalog_stream("checks", CHECKS_SCHEMA)
 
         checks_written = []
         with patch("tap_clubspeed.sync.singer.write_record",
@@ -181,7 +173,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client_payments = MagicMock(spec=Clubspeed)
         client_payments.payments.return_value = iter(payments_records)
         instance_payments = Payments(client_payments)
-        instance_payments.stream = _make_catalog_stream("payments", PAYMENTS_SCHEMA)
+        instance_payments.stream = self._make_catalog_stream("payments", PAYMENTS_SCHEMA)
 
         payments_written = []
         with patch("tap_clubspeed.sync.singer.write_record",
@@ -207,7 +199,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client.booking.return_value = iter(all_records)
 
         instance = Booking(client)
-        instance.stream = _make_catalog_stream(
+        instance.stream = self._make_catalog_stream(
             "booking",
             {"properties": {"onlineBookingsId": {"type": ["null", "integer"]}},
              "type": "object"},
@@ -228,7 +220,7 @@ class ClubspeedInterruptedSyncTest(ClubspeedBaseTest, unittest.TestCase):
         client.booking.return_value = iter([{"onlineBookingsId": 1},
                                             {"onlineBookingsId": 2}])
         instance = Booking(client)
-        instance.stream = _make_catalog_stream(
+        instance.stream = self._make_catalog_stream(
             "booking",
             {"properties": {"onlineBookingsId": {"type": ["null", "integer"]}},
              "type": "object"},
