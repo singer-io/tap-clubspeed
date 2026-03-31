@@ -168,7 +168,7 @@ class ClubspeedPaginationTest(ClubspeedBaseTest, unittest.TestCase):
         mock_resp_500.raise_for_status = lambda: None  # _get checks status == 500 directly
 
         mock_get.side_effect = [
-            MockResponse([], 500),  # 500 → IgnoreHttpException
+            mock_resp_500,  # 500 → IgnoreHttpException
             MockResponse([{"checkId": 42}]),
             MockResponse([]),
         ]
