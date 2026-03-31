@@ -19,14 +19,6 @@ from tap_clubspeed.streams import STREAMS
 from tap_clubspeed.sync import sync_stream
 
 
-def _make_catalog_stream(stream_name, schema):
-    cs = MagicMock()
-    cs.tap_stream_id = stream_name
-    cs.schema.to_dict.return_value = schema
-    cs.metadata = []
-    return cs
-
-
 class ClubspeedAutomaticFieldsTest(ClubspeedBaseTest, unittest.TestCase):
     """
     Verify that automatic fields (primary keys + replication keys) are always
@@ -60,7 +52,7 @@ class ClubspeedAutomaticFieldsTest(ClubspeedBaseTest, unittest.TestCase):
 
         stream_class = STREAMS[stream_name]
         instance = stream_class(client)
-        instance.stream = _make_catalog_stream(stream_name, instance.load_schema())
+        instance.stream = self._make_catalog_stream(stream_name, instance.load_schema())
 
         written = []
 
@@ -131,7 +123,7 @@ class ClubspeedAutomaticFieldsTest(ClubspeedBaseTest, unittest.TestCase):
 
         from tap_clubspeed.streams import Booking
         instance = Booking(client)
-        instance.stream = _make_catalog_stream(
+        instance.stream = self._make_catalog_stream(
             stream_name,
             {"properties": {"onlineBookingsId": {"type": ["null", "integer"]}},
              "type": "object"},

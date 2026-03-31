@@ -19,17 +19,6 @@ from tap_clubspeed.streams import Checks, Customers, Payments
 from tap_clubspeed.sync import sync_stream
 
 
-def _make_catalog_stream(stream_name, schema=None):
-    """Build a minimal mock catalog stream object."""
-    if schema is None:
-        schema = {"properties": {}, "type": "object"}
-    cs = MagicMock()
-    cs.tap_stream_id = stream_name
-    cs.schema.to_dict.return_value = schema
-    cs.metadata = []
-    return cs
-
-
 class ClubspeedBookmarkTest(ClubspeedBaseTest, unittest.TestCase):
     """Verify bookmark behaviour for INCREMENTAL streams."""
 
@@ -108,7 +97,7 @@ class ClubspeedBookmarkTest(ClubspeedBaseTest, unittest.TestCase):
             },
             "type": "object",
         }
-        instance.stream = _make_catalog_stream("checks", schema)
+        instance.stream = self._make_catalog_stream("checks", schema)
         state = {}
 
         sync_stream(state, instance)
@@ -130,7 +119,7 @@ class ClubspeedBookmarkTest(ClubspeedBaseTest, unittest.TestCase):
             },
             "type": "object",
         }
-        instance.stream = _make_catalog_stream("checks", schema)
+        instance.stream = self._make_catalog_stream("checks", schema)
 
         # Records: one old (before bookmark), one new (after bookmark)
         records = [
@@ -162,7 +151,7 @@ class ClubspeedBookmarkTest(ClubspeedBaseTest, unittest.TestCase):
             },
             "type": "object",
         }
-        instance.stream = _make_catalog_stream("payments", schema)
+        instance.stream = self._make_catalog_stream("payments", schema)
         client.payments.return_value = iter([
             {"paymentId": 1, "payDate": "2024-01-01 00:00:00"},
             {"paymentId": 2, "payDate": "2024-06-15 00:00:00"},
@@ -189,7 +178,7 @@ class ClubspeedBookmarkTest(ClubspeedBaseTest, unittest.TestCase):
             },
             "type": "object",
         }
-        instance.stream = _make_catalog_stream("customers", schema)
+        instance.stream = self._make_catalog_stream("customers", schema)
         client.customers.return_value = iter([
             {"customerId": 1, "lastVisited": "2024-01-01 00:00:00"},
             {"customerId": 2, "lastVisited": "2024-01-02 00:00:00"},
