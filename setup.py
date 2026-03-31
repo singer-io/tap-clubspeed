@@ -9,6 +9,7 @@ setup(name='tap-clubspeed',
       author_email="andyjiang@gmail.com",
       url='https://www.singer.io/',
       classifiers=['Programming Language :: Python :: 3 :: Only'],
+      python_requires='>=3.12',
       py_modules=['tap_clubspeed'],
       install_requires=[
           'singer-python==6.8.0',

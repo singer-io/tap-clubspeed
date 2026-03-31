@@ -24,15 +24,6 @@ KNOWN_MISSING_FIELDS = {
 }
 
 
-def _make_catalog_stream(stream_name, schema):
-    """Build a minimal mock catalog stream object for sync_stream."""
-    cs = MagicMock()
-    cs.tap_stream_id = stream_name
-    cs.schema.to_dict.return_value = schema
-    cs.metadata = []
-    return cs
-
-
 class ClubspeedAllFieldsTest(ClubspeedBaseTest, unittest.TestCase):
     """Verify that all schema fields are present in at least one emitted record."""
 
@@ -55,7 +46,7 @@ class ClubspeedAllFieldsTest(ClubspeedBaseTest, unittest.TestCase):
 
         stream_class = STREAMS[stream_name]
         instance = stream_class(client)
-        instance.stream = _make_catalog_stream(stream_name, instance.load_schema())
+        instance.stream = self._make_catalog_stream(stream_name, instance.load_schema())
 
         written = []
 

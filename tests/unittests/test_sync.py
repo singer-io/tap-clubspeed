@@ -16,7 +16,7 @@ from tap_clubspeed.streams import (
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _make_stream_instance(stream_class, records, replication_key=None, bookmark=None):
+def _make_stream_instance(stream_class, records, replication_key=None):
     """
     Build a stream instance whose underlying client method returns `records`.
     Also attaches a catalog stream mock with a minimal schema.

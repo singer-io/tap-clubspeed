@@ -17,14 +17,6 @@ from tap_clubspeed.streams import Checks, Customers
 from tap_clubspeed.sync import sync_stream
 
 
-def _make_catalog_stream(stream_name, schema):
-    cs = MagicMock()
-    cs.tap_stream_id = stream_name
-    cs.schema.to_dict.return_value = schema
-    cs.metadata = []
-    return cs
-
-
 class ClubspeedStartDateTest(ClubspeedBaseTest, unittest.TestCase):
     """
     Verify start-date / bookmark filtering behaviour for INCREMENTAL streams.
@@ -44,7 +36,7 @@ class ClubspeedStartDateTest(ClubspeedBaseTest, unittest.TestCase):
         getattr(client, client_method_name).return_value = iter(records)
 
         instance = stream_class(client)
-        instance.stream = _make_catalog_stream(instance.name, schema)
+        instance.stream = self._make_catalog_stream(instance.name, schema)
 
         rep_key = instance.replication_key
         state = (
@@ -177,7 +169,7 @@ class ClubspeedStartDateTest(ClubspeedBaseTest, unittest.TestCase):
         client.booking.return_value = iter(records)
 
         instance = Booking(client)
-        instance.stream = _make_catalog_stream(
+        instance.stream = self._make_catalog_stream(
             "booking",
             {"properties": {"onlineBookingsId": {"type": ["null", "integer"]}},
              "type": "object"},
