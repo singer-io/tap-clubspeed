@@ -10,9 +10,9 @@ from unittest.mock import patch, MagicMock
 import singer
 
 try:
-    from .base import ClubspeedBaseTest, MockResponse
+    from .base import ClubspeedBaseTest
 except ImportError:
-    from base import ClubspeedBaseTest, MockResponse
+    from base import ClubspeedBaseTest
 
 from tap_clubspeed.clubspeed import Clubspeed
 from tap_clubspeed.streams import STREAMS
