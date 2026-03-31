@@ -319,12 +319,12 @@ class TestStreamBookmarkHelpers(unittest.TestCase):
 
     def test_is_bookmark_old_with_integer_key(self):
         """is_bookmark_old compares integer replication keys correctly."""
-        state = {"bookmarks": {"customers": {"lastVisited": "3"}}}
+        state = {"bookmarks": {"customers": {"lastVisited": 3}}}
         instance = Customers(MagicMock())
         # value 5 >= current bookmark 3 → True (is old enough to include)
-        self.assertTrue(instance.is_bookmark_old(state, "5"))
+        self.assertTrue(instance.is_bookmark_old(state, 5))
         # value 1 < current bookmark 3 → False
-        self.assertFalse(instance.is_bookmark_old(state, "1"))
+        self.assertFalse(instance.is_bookmark_old(state, 1))
 
 
 if __name__ == "__main__":
