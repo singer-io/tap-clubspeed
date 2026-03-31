@@ -71,7 +71,7 @@ class TestSyncStreamFullTable(unittest.TestCase):
 
     @patch("tap_clubspeed.sync.singer.write_record")
     def test_returns_record_count(self, mock_write_record):
-        """sync_stream returns the number of records written."""
+        """sync_stream returns the number of records it processes (attempted writes)."""
         records = [{"id": 1}, {"id": 2}]
         instance = _make_stream_instance(Booking, records)
         instance.stream.schema.to_dict.return_value = {
