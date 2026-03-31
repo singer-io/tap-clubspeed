@@ -2,7 +2,7 @@
 Unit tests for tap_clubspeed.sync and Stream.sync().
 """
 import unittest
-from unittest.mock import MagicMock, patch, call
+from unittest.mock import MagicMock, patch
 
 import singer
 
