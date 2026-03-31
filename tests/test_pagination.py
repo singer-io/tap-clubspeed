@@ -18,9 +18,6 @@ from tap_clubspeed.clubspeed import Clubspeed
 class ClubspeedPaginationTest(ClubspeedBaseTest, unittest.TestCase):
     """Verify tap-clubspeed handles multi-page API responses correctly."""
 
-    # Patch target: the requests.get used inside clubspeed.py
-    PATCH_TARGET = "tap_clubspeed.clubspeed.requests.get"
-
     def _make_pages(self, stream_name, key=None, page_sizes=None):
         """
         Build a list of MockResponse objects for the given page sizes.
