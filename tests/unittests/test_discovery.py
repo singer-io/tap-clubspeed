@@ -1,10 +1,8 @@
 """
 Unit tests for tap_clubspeed.discover.
 """
-import json
-import os
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 from tap_clubspeed.clubspeed import Clubspeed
 from tap_clubspeed.discover import discover_streams
