@@ -8,7 +8,7 @@ jobs:
       - run:
           name: 'Setup virtual env'
           command: |
-            uv venv --python 3.9 /usr/local/share/virtualenvs/tap-clubspeed
+            uv venv --python 3.12 /usr/local/share/virtualenvs/tap-clubspeed
             source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
             uv pip install .
       - run:
@@ -22,7 +22,14 @@ jobs:
           command: |
             source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
             uv pip install pytest coverage
-            coverage run -m pytest tests
+            coverage run -m pytest tests/unittests
+            coverage html
+      - run:
+          name: 'Integration Tests'
+          command: |
+            source /usr/local/share/virtualenvs/tap-clubspeed/bin/activate
+            uv pip install pytest coverage
+            coverage run -m pytest tests --ignore=tests/unittests
             coverage html
 
 workflows:
