@@ -161,6 +161,9 @@ class Checks(Stream):
 
 
 class CheckTotals(Stream):
+    # NOTE: CheckTotals is intentionally excluded from the STREAMS registry.
+    # A JSON schema file (schemas/check_totals.json) does not yet exist, so
+    # this stream cannot be discovered or synced until that file is added.
     name = "check_totals"
     replication_method = "INCREMENTAL"
     replication_key = "closedDate"

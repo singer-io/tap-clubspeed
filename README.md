@@ -6,7 +6,7 @@ Tap for [Clubspeed](https://www.clubspeed.com/).
 ## Requirements
 
 - pip3
-- python 3.5+
+- python 3.12+
 - mkvirtualenv
 
 ## Installation
