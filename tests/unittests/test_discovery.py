@@ -163,6 +163,25 @@ class TestStreamCheckAccess(unittest.TestCase):
         stream.name = "nonexistent_stream"
         self.assertTrue(stream.check_access())
 
+    def test_limit_set_to_1_during_probe_and_restored(self):
+        """check_access temporarily sets _limit=1 and restores the original value."""
+        from tap_clubspeed.streams import Checks
+
+        client = MagicMock()
+        client._limit = 100
+        observed_limits = []
+
+        def capture_limit():
+            observed_limits.append(client._limit)
+            return iter([])
+
+        client.checks.side_effect = capture_limit
+        stream = Checks(client)
+        stream.check_access()
+
+        self.assertEqual([1], observed_limits)
+        self.assertEqual(100, client._limit)
+
 
 class TestApplyAccessChecks(unittest.TestCase):
     """_apply_access_checks filters inaccessible streams from the catalog."""
@@ -203,7 +222,7 @@ class TestApplyAccessChecks(unittest.TestCase):
         from tap_clubspeed.streams import Stream
 
         with patch.object(Stream, "check_access", return_value=False):
-            with self.assertRaises(Exception, msg="No streams are accessible"):
+            with self.assertRaisesRegex(Exception, "No streams are accessible"):
                 _apply_access_checks(self.client, self.entries)
 
     def test_single_accessible_stream_succeeds(self):

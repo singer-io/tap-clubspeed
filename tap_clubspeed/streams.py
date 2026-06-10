@@ -102,6 +102,9 @@ class Stream():
         if self.client is None:
             return True
         from tap_clubspeed.clubspeed import ClubspeedForbiddenError
+        original_limit = getattr(self.client, '_limit', None)
+        if original_limit is not None:
+            self.client._limit = 1
         try:
             method = getattr(self.client, self.name, None)
             if method is None:
@@ -111,6 +114,9 @@ class Stream():
             return True
         except ClubspeedForbiddenError:
             return False
+        finally:
+            if original_limit is not None:
+                self.client._limit = original_limit
 
     def is_selected(self):
         return self.stream is not None
