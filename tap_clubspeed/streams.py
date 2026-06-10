@@ -97,6 +97,21 @@ class Stream():
         return metadata.to_list(mdata)
 
 
+    def check_access(self) -> bool:
+        """Return True if the stream endpoint is accessible, False on HTTP 403."""
+        if self.client is None:
+            return True
+        from tap_clubspeed.clubspeed import ClubspeedForbiddenError
+        try:
+            method = getattr(self.client, self.name, None)
+            if method is None:
+                return True
+            for _ in method():
+                break
+            return True
+        except ClubspeedForbiddenError:
+            return False
+
     def is_selected(self):
         return self.stream is not None
 

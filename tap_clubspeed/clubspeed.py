@@ -9,6 +9,10 @@ class IgnoreHttpException(Exception):
     pass
 
 
+class ClubspeedForbiddenError(Exception):
+    pass
+
+
 class Clubspeed(object):
 
 
@@ -30,6 +34,10 @@ class Clubspeed(object):
         response = requests.get(url)
         if response.status_code == 500:
             raise IgnoreHttpException("http status is 500.")
+        if response.status_code == 403:
+            raise ClubspeedForbiddenError(
+                "HTTP 403 Forbidden for URL: {url}".format(url=url)
+            )
         response.raise_for_status()
         return response.json()
 
