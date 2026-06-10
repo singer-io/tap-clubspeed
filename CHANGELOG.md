@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.2.0
-  * Streams the credentials cannot access (HTTP 403) are now excluded from the catalog during discovery [#6](https://github.com/singer-io/tap-clubspeed/pull/6)
+  * Streams the credentials cannot access (HTTP 403) are now excluded from the catalog during discovery [#8](https://github.com/singer-io/tap-clubspeed/pull/8)
   * Bump `requests` from 2.33.0 to 2.34.2
 
 ## 1.1.0
