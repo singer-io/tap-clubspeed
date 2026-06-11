@@ -15,12 +15,12 @@ def _apply_access_checks(client, catalog_entries: list) -> list:
 
     Raises Exception if no streams are accessible.
     """
-    accessible = []
+    accessible_streams = []
     for entry in catalog_entries:
         stream_name = entry['tap_stream_id']
         instance = STREAMS[stream_name](client)
         if instance.check_access():
-            accessible.append(entry)
+            accessible_streams.append(entry)
         else:
             LOGGER.warning(
                 "Stream '%s' is not accessible with the provided credentials "
@@ -28,13 +28,13 @@ def _apply_access_checks(client, catalog_entries: list) -> list:
                 stream_name,
             )
 
-    if not accessible:
+    if not accessible_streams:
         raise Exception(
             "No streams are accessible with the provided credentials. "
             "Discovery cannot produce a usable catalog."
         )
 
-    return accessible
+    return accessible_streams
 
 
 def discover_streams(client):
