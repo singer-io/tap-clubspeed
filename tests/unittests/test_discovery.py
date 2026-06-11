@@ -171,7 +171,7 @@ class TestStreamCheckAccess(unittest.TestCase):
         client._limit = 100
         observed_limits = []
 
-        def capture_limit():
+        def capture_limit(column_name=None, bookmark=None):
             observed_limits.append(client._limit)
             return iter([])
 
