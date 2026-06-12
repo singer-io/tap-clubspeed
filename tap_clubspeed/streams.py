@@ -127,8 +127,7 @@ class Stream():
         except ClubspeedForbiddenError:
             return False
         finally:
-            if original_limit is not None:
-                self.client._limit = original_limit
+            self.client._limit = original_limit
 
     def is_selected(self):
         return self.stream is not None
