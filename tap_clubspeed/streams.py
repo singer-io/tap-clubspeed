@@ -97,6 +97,38 @@ class Stream():
         return metadata.to_list(mdata)
 
 
+    def check_access(self) -> bool:
+        """Return True if the stream endpoint is accessible, False on HTTP 403."""
+        if self.client is None:
+            return True
+        from tap_clubspeed.clubspeed import ClubspeedForbiddenError
+        original_limit = getattr(self.client, '_limit', None)
+        if original_limit is not None:
+            self.client._limit = 1
+        try:
+            # Look up the client method whose name matches this stream (e.g. self.client.checks
+            # for a Checks stream). getattr is used instead of a direct attribute access so that
+            # the same check_access() implementation works generically for every stream subclass
+            # at runtime, using each subclass's `name` class attribute as the lookup key.
+            # Returns None (instead of raising AttributeError) if no matching method exists.
+            method = getattr(self.client, self.name, None)
+            if method is None:
+                return True
+            # Pass the stream's replication key and the current UTC timestamp as the bookmark
+            # so the access probe requests only records created strictly after "now". This
+            # guarantees an empty result set (minimising response payload) while still
+            # executing the full HTTP round-trip required to detect a 403 Forbidden response.
+            # For FULL_TABLE streams whose replication_key is None, _add_filter skips the
+            # where-clause entirely, so the timestamp has no effect for those streams.
+            now = datetime.datetime.now(tz=pytz.UTC).isoformat()
+            for _ in method(self.replication_key, now):
+                break
+            return True
+        except ClubspeedForbiddenError:
+            return False
+        finally:
+            self.client._limit = original_limit
+
     def is_selected(self):
         return self.stream is not None
 

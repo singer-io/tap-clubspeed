@@ -128,6 +128,17 @@ class TestGetMethod(unittest.TestCase):
             self.client._get(self.url)
 
     @patch("tap_clubspeed.clubspeed.requests.get")
+    def test_403_raises_forbidden_error(self, mock_get):
+        """_get raises ClubspeedForbiddenError on 403."""
+        from tap_clubspeed.clubspeed import ClubspeedForbiddenError
+        resp = MagicMock()
+        resp.status_code = 403
+        resp.raise_for_status.return_value = None
+        mock_get.return_value = resp
+        with self.assertRaises(ClubspeedForbiddenError):
+            self.client._get(self.url)
+
+    @patch("tap_clubspeed.clubspeed.requests.get")
     def test_get_logs_url(self, mock_get):
         """_get logs the URL before making the request."""
         mock_get.return_value = _make_response(200, {})
