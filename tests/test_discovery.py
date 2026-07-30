@@ -5,7 +5,7 @@ Calls tap_clubspeed.discover.discover_streams() directly — no HTTP calls neede
 because discovery only reads JSON schema files and builds metadata in-memory.
 """
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 from singer import metadata
 
@@ -14,7 +14,7 @@ try:
 except ImportError:
     from base import ClubspeedBaseTest
 
-from tap_clubspeed.clubspeed import Clubspeed
+from tap_clubspeed.clubspeed import Clubspeed, ClubspeedForbiddenError
 from tap_clubspeed.discover import discover_streams
 from tap_clubspeed.streams import STREAMS
 
@@ -171,6 +171,75 @@ class ClubspeedDiscoveryTest(ClubspeedBaseTest, unittest.TestCase):
         mdata = metadata.to_map(entry["metadata"])
         method = metadata.get(mdata, (), "forced-replication-method")
         self.assertEqual("FULL_TABLE", method)
+
+
+class ClubspeedDiscoveryExclusionTest(unittest.TestCase):
+    """Integration tests: unauthorized (403) streams are excluded from the catalog."""
+
+    def _catalog_with_one_blocked(self, blocked_stream: str):
+        """Return a catalog where `blocked_stream` raises ClubspeedForbiddenError."""
+        from tap_clubspeed.streams import Stream
+
+        def selective_check_access(self_stream):
+            return self_stream.name != blocked_stream
+
+        client = MagicMock(spec=Clubspeed)
+        with patch.object(Stream, "check_access", selective_check_access):
+            return discover_streams(client)
+
+    def test_forbidden_stream_not_in_catalog(self):
+        """A stream returning 403 is absent from the discovered catalog."""
+        catalog = self._catalog_with_one_blocked("checks")
+        names = {e["tap_stream_id"] for e in catalog}
+        self.assertNotIn("checks", names)
+
+    def test_authorized_streams_still_in_catalog(self):
+        """All streams other than the blocked one remain in the catalog."""
+        blocked = "checks"
+        catalog = self._catalog_with_one_blocked(blocked)
+        names = {e["tap_stream_id"] for e in catalog}
+        expected = set(STREAMS.keys()) - {blocked}
+        self.assertEqual(expected, names)
+
+    def test_warning_logged_for_excluded_stream(self):
+        """A LOGGER.warning is emitted for the excluded stream."""
+        from tap_clubspeed.streams import Stream
+
+        client = MagicMock(spec=Clubspeed)
+
+        def block_checks(self_stream):
+            return self_stream.name != "checks"
+
+        with patch.object(Stream, "check_access", block_checks):
+            with self.assertLogs(level="WARNING") as cm:
+                discover_streams(client)
+
+        self.assertTrue(any("checks" in line for line in cm.output))
+
+    def test_all_streams_blocked_raises_exception(self):
+        """discover_streams raises when every stream returns 403."""
+        from tap_clubspeed.streams import Stream
+
+        client = MagicMock(spec=Clubspeed)
+        with patch.object(Stream, "check_access", return_value=False):
+            with self.assertRaisesRegex(Exception, "No streams are accessible"):
+                discover_streams(client)
+
+    def test_single_authorized_stream_succeeds(self):
+        """Discovery returns a catalog as long as at least one stream is accessible."""
+        from tap_clubspeed.streams import Stream
+
+        client = MagicMock(spec=Clubspeed)
+        only_accessible = list(STREAMS.keys())[0]
+
+        def allow_one(self_stream):
+            return self_stream.name == only_accessible
+
+        with patch.object(Stream, "check_access", allow_one):
+            catalog = discover_streams(client)
+
+        self.assertEqual(1, len(catalog))
+        self.assertEqual(only_accessible, catalog[0]["tap_stream_id"])
 
 
 if __name__ == "__main__":
