@@ -1,6 +1,8 @@
 
 import requests
 import logging
+import re
+from urllib.parse import urlsplit
 
 logger = logging.getLogger()
 
@@ -18,6 +20,9 @@ class Clubspeed(object):
 
     def __init__(self, subdomain=None, private_key=None, session=None):
         """ Simple Python wrapper for the Clubspeed API. Only supports GET. """
+        if not isinstance(subdomain, str) or not re.fullmatch(
+            r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?', subdomain):
+            raise ValueError("subdomain must be a single valid Clubspeed tenant label")
         self.protocol = 'https'
         self.domain = 'clubspeedtiming.com'
         self.subdomain = subdomain
@@ -30,15 +35,32 @@ class Clubspeed(object):
 
 
     def _get(self, url, **kwargs):
-        logger.info("Hitting endpoint {url}".format(url=url))
-        response = requests.get(url)
+        endpoint = urlsplit(url)
+        expected_host = '{}.clubspeedtiming.com'.format(self.subdomain).lower()
+        if endpoint.scheme != 'https' or endpoint.netloc.lower() != expected_host:
+            raise ValueError("Requests must target the configured Clubspeed HTTPS host")
+        safe_url = endpoint._replace(query="", fragment="").geturl()
+        logger.info("Hitting endpoint {url}".format(url=safe_url))
+        response = requests.get(url, allow_redirects=False)
+        if 300 <= response.status_code < 400:
+            raise requests.exceptions.HTTPError(
+                "Clubspeed redirects are not allowed", response=response
+            )
         if response.status_code == 500:
             raise IgnoreHttpException("http status is 500.")
         if response.status_code == 403:
             raise ClubspeedForbiddenError(
-                "HTTP 403 Forbidden for URL: {url}".format(url=url)
+                "HTTP 403 Forbidden for URL: {url}".format(url=safe_url)
             )
-        response.raise_for_status()
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
+            raise requests.exceptions.HTTPError(
+                "HTTP {status} response for endpoint {url}".format(
+                    status=response.status_code, url=safe_url
+                ),
+                response=response,
+            ) from None
         return response.json()
 
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.1
+  * Hardened SSRF protections with strict tenant subdomain validation, configured HTTPS host checks, and credentialed request redirect blocking [#10](https://github.com/singer-io/tap-clubspeed/pull/10)
+
 ## 1.2.0
   * Streams the credentials cannot access (HTTP 403) are now excluded from the catalog during discovery [#8](https://github.com/singer-io/tap-clubspeed/pull/8)
   * Bump `requests` from 2.33.0 to 2.34.2
