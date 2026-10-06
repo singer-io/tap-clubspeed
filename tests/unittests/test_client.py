@@ -164,8 +164,9 @@ class TestGetMethod(unittest.TestCase):
     def test_404_raises_http_error(self, mock_get):
         """_get raises HTTPError on 404."""
         mock_get.return_value = _make_response(404)
-        with self.assertRaises(requests.exceptions.HTTPError):
+        with self.assertRaises(requests.exceptions.HTTPError) as context:
             self.client._get(self.url)
+        self.assertNotIn("secret123", str(context.exception))
 
     @patch("tap_clubspeed.clubspeed.requests.get")
     def test_403_raises_forbidden_error(self, mock_get):
@@ -175,16 +176,19 @@ class TestGetMethod(unittest.TestCase):
         resp.status_code = 403
         resp.raise_for_status.return_value = None
         mock_get.return_value = resp
-        with self.assertRaises(ClubspeedForbiddenError):
+        with self.assertRaises(ClubspeedForbiddenError) as context:
             self.client._get(self.url)
+        self.assertNotIn("secret123", str(context.exception))
 
     @patch("tap_clubspeed.clubspeed.requests.get")
-    def test_get_logs_url(self, mock_get):
-        """_get logs the URL before making the request."""
+    def test_get_logs_url_without_query_parameters(self, mock_get):
+        """_get logs the endpoint without credential query parameters."""
         mock_get.return_value = _make_response(200, {})
         with self.assertLogs("root", level="INFO") as cm:
             self.client._get(self.url)
-        self.assertTrue(any(self.url in line for line in cm.output))
+        log_output = "\n".join(cm.output)
+        self.assertIn("https://myclub.clubspeedtiming.com/api/index.php/checks.json", log_output)
+        self.assertNotIn("secret123", log_output)
 
 
 class TestGetResponse(unittest.TestCase):
