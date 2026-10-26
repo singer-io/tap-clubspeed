@@ -25,6 +25,18 @@ def _make_response(status_code=200, json_body=None):
 class TestConstructEndpoint(unittest.TestCase):
     """_construct_endpoint builds the correct URL."""
 
+    @patch("tap_clubspeed.clubspeed.requests.get")
+    def test_rejects_invalid_subdomains_before_request(self, mock_get):
+        for subdomain in (None, "", "some-url.com/", "https://example.com",
+                          "localhost/", "127.0.0.1/", "tenant@evil.com/",
+                          "tenant?query", "tenant#fragment", "tenant\\path",
+                          "tenant.other", "-tenant", "tenant-", "tenant_name",
+                          "tenant\n", "a" * 64, 123):
+            with self.subTest(subdomain=subdomain):
+                with self.assertRaises(ValueError):
+                    Clubspeed(subdomain, "secret123").is_authorized()
+        mock_get.assert_not_called()
+
     def setUp(self):
         self.client = Clubspeed("myclub", "secret123")
 
@@ -112,6 +124,34 @@ class TestGetMethod(unittest.TestCase):
         mock_get.return_value = _make_response(200, {"data": [1, 2, 3]})
         result = self.client._get(self.url)
         self.assertEqual({"data": [1, 2, 3]}, result)
+        mock_get.assert_called_once_with(self.url, allow_redirects=False)
+
+    @patch("tap_clubspeed.clubspeed.requests.get")
+    def test_rejects_untrusted_destinations(self, mock_get):
+        for url in ("https://example.com/payments.json",
+                    "https://127.0.0.1/payments.json",
+                    "http://myclub.clubspeedtiming.com/payments.json",
+                    "https://myclub.clubspeedtiming.com.evil.com/payments.json",
+                    "https://myclub.clubspeedtiming.com@evil.com/payments.json",
+                    "https://other.clubspeedtiming.com/payments.json",
+                    "https://myclub.clubspeedtiming.com:8443/payments.json"):
+            with self.subTest(url=url):
+                with self.assertRaises(ValueError):
+                    self.client._get(url)
+        mock_get.assert_not_called()
+
+    @patch("tap_clubspeed.clubspeed.requests.get")
+    def test_rejects_redirects(self, mock_get):
+        for status in (301, 302, 303, 307, 308):
+            with self.subTest(status=status):
+                mock_get.reset_mock()
+                response = _make_response(status)
+                response.headers = {"Location": "http://127.0.0.1/"}
+                mock_get.return_value = response
+                with self.assertRaises(requests.exceptions.HTTPError):
+                    self.client._get(self.url)
+                mock_get.assert_called_once_with(self.url, allow_redirects=False)
+                response.json.assert_not_called()
 
     @patch("tap_clubspeed.clubspeed.requests.get")
     def test_500_raises_ignore_http_exception(self, mock_get):
@@ -124,8 +164,9 @@ class TestGetMethod(unittest.TestCase):
     def test_404_raises_http_error(self, mock_get):
         """_get raises HTTPError on 404."""
         mock_get.return_value = _make_response(404)
-        with self.assertRaises(requests.exceptions.HTTPError):
+        with self.assertRaises(requests.exceptions.HTTPError) as context:
             self.client._get(self.url)
+        self.assertNotIn("secret123", str(context.exception))
 
     @patch("tap_clubspeed.clubspeed.requests.get")
     def test_403_raises_forbidden_error(self, mock_get):
@@ -135,16 +176,19 @@ class TestGetMethod(unittest.TestCase):
         resp.status_code = 403
         resp.raise_for_status.return_value = None
         mock_get.return_value = resp
-        with self.assertRaises(ClubspeedForbiddenError):
+        with self.assertRaises(ClubspeedForbiddenError) as context:
             self.client._get(self.url)
+        self.assertNotIn("secret123", str(context.exception))
 
     @patch("tap_clubspeed.clubspeed.requests.get")
-    def test_get_logs_url(self, mock_get):
-        """_get logs the URL before making the request."""
+    def test_get_logs_url_without_query_parameters(self, mock_get):
+        """_get logs the endpoint without credential query parameters."""
         mock_get.return_value = _make_response(200, {})
         with self.assertLogs("root", level="INFO") as cm:
             self.client._get(self.url)
-        self.assertTrue(any(self.url in line for line in cm.output))
+        log_output = "\n".join(cm.output)
+        self.assertIn("https://myclub.clubspeedtiming.com/api/index.php/checks.json", log_output)
+        self.assertNotIn("secret123", log_output)
 
 
 class TestGetResponse(unittest.TestCase):
